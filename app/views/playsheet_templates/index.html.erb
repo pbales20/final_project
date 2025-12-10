@@ -1,0 +1,133 @@
+<h1>
+  List of all playsheets
+</h1>
+
+<hr>
+
+<article>
+  <header>
+    <h2>
+      Add a new playsheet
+    </h2>
+  </header>
+
+  <form action="/insert_playsheet" method="post">
+
+    <div>
+      <label for="playsheet_name_box">
+        Playsheet name
+      </label>
+
+      <input type="text" id="playsheet_name_box" name="query_playsheet_name">
+    </div>
+
+    <!-- SIDE OF BALL DROPDOWN -->
+    <div>
+      <label for="side_of_ball_box">
+        Side of ball
+      </label>
+
+      <select id="side_of_ball_box" name="query_side_of_ball">
+        <option value="">Select a side</option>
+        <option value="Offense">Offense</option>
+        <option value="Defense">Defense</option>
+      </select>
+    </div>
+
+    <!-- PLAYBOOK DROPDOWN (FILTERED BY SIDE VIA JS) -->
+    <div>
+      <label for="playbook_id_box">
+        Playbook
+      </label>
+
+      <select id="playbook_id_box" name="query_playbook_id">
+        <option value="">Select a playbook</option>
+        <% @playbooks.each do |pb| %>
+          <option 
+            value="<%= pb.id %>" 
+            data-side="<%= pb.side_of_ball %>">
+            <%= pb.playbook_name %> (<%= pb.side_of_ball %>)
+          </option>
+        <% end %>
+      </select>
+    </div>
+
+    <button type="submit">
+      Create playsheet
+    </button>
+  </form>
+</article>
+
+<hr>
+
+
+<article>
+  <table>
+    <thead>
+      <tr>
+        <th>Side of Ball</th>
+        <th>Playsheet</th>      
+        <th>Playbook</th>      
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @list_of_playsheets.each do |a_playsheet| %>
+        <tr>
+          <td>
+            <%= a_playsheet.side_of_ball %>
+          </td>          
+          <td>
+            <a href="/playsheets/<%= a_playsheet.id %>">
+          <%= a_playsheet.playsheet_name %>
+        </a>
+          </td>        
+          <td>
+            <a href="/playbooks/<%= a_playsheet.playbook_id %>">
+              <%= a_playsheet.playbook.playbook_name %>
+            </a>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</article>
+<hr>
+
+<!-- SIMPLE JS FILTERING LOGIC -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const sideSelect = document.getElementById("side_of_ball_box");
+    const playbookSelect = document.getElementById("playbook_id_box");
+
+    // Keep a copy of all original options (except the placeholder)
+    const allOptions = Array.from(playbookSelect.options).filter(opt => opt.value !== "");
+
+    function filterPlaybooks() {
+      const selectedSide = sideSelect.value;
+
+      // Clear current options
+      playbookSelect.innerHTML = "";
+
+      // Always add placeholder first
+      const placeholder = document.createElement("option");
+      placeholder.value = "";
+      placeholder.textContent = "Select a playbook";
+      playbookSelect.appendChild(placeholder);
+
+      // Add only matching options (or all if no side selected)
+      allOptions
+        .filter(opt => {
+          if (selectedSide === "") return true;
+          return opt.dataset.side === selectedSide;
+        })
+        .forEach(opt => playbookSelect.appendChild(opt));
+    }
+
+    // Run once on load (in case you want to prefill later)
+    filterPlaybooks();
+
+    // Re-filter whenever side changes
+    sideSelect.addEventListener("change", filterPlaybooks);
+  });
+</script>

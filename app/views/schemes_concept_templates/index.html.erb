@@ -1,0 +1,51 @@
+<h1>
+  List of all schemes concepts
+</h1>
+
+<hr>
+
+<article>
+  <header>
+    <h2>
+      Add a new schemes concept
+    </h2>
+  </header>
+
+  <form action="/insert_schemes_concept" method="post">
+    <div>
+      <label for="scheme_id_box">
+        Scheme
+      </label>
+
+      <input type="text" id="scheme_id_box" name="query_scheme_id">
+    </div>
+
+    <div>
+      <label for="concept_id_box">
+        Concept
+      </label>
+
+      <input type="text" id="concept_id_box" name="query_concept_id">
+    </div>
+
+    <button type="submit">
+      Create schemes concept
+    </button>
+  </form>
+</article>
+
+<hr>
+
+<article>
+  <ul>
+    <% @list_of_schemes_concepts.each do |a_schemes_concept| %>
+      <li>
+        <a href="/schemes_concepts/<%= a_schemes_concept.id %>">
+          Schemes concept #<%= a_schemes_concept.id %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</article>
+
+<hr>

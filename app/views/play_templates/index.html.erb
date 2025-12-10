@@ -1,0 +1,149 @@
+<h1> 
+  List of all plays
+</h1>
+
+<!-- FILTER FORM -->
+<article>
+  <form method="get" action="/plays">
+    <div>
+      <label for="side_of_ball_filter">
+        Side of Ball
+      </label>
+      <select id="side_of_ball_filter" name="side_of_ball">
+        <option value="">All</option>
+        <option value="Offense" <%= "selected" if params[:side_of_ball] == "Offense" %>>Offense</option>
+        <option value="Defense" <%= "selected" if params[:side_of_ball] == "Defense" %>>Defense</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="playbook_filter">
+        Playbook
+      </label>
+      <select id="playbook_filter" name="playbook_id">
+        <option value="">All</option>
+        <% @playbooks.each do |playbook| %>
+          <option value="<%= playbook.id %>" <%= "selected" if params[:playbook_id].to_s == playbook.id.to_s %>>
+            <%= playbook.playbook_name %>
+          </option>
+        <% end %>
+      </select>
+    </div>
+
+    <div>
+      <label for="formation_filter">
+        Formation
+      </label>
+      <select id="formation_filter" name="formation_id">
+        <option value="">All</option>
+        <% @formations.each do |formation| %>
+          <option value="<%= formation.id %>" <%= "selected" if params[:formation_id].to_s == formation.id.to_s %>>
+            <%= formation.formation_name %>
+          </option>
+        <% end %>
+      </select>
+    </div>
+
+    <div>
+      <label for="formation_set_filter">
+        Formation Set
+      </label>
+      <select id="formation_set_filter" name="formation_set_id">
+        <option value="">All</option>
+        <% @formation_sets.each do |fs| %>
+          <option value="<%= fs.id %>" <%= "selected" if params[:formation_set_id].to_s == fs.id.to_s %>>
+            <%= fs.formation_set %>
+          </option>
+        <% end %>
+      </select>
+    </div>
+
+    <div>
+      <label for="play_search">
+        Play name contains
+      </label>
+      <input 
+        type="text" 
+        id="play_search" 
+        name="play_search" 
+        value="<%= params[:play_search] %>">
+    </div>
+
+    <button type="submit">
+      Apply filters
+    </button>
+
+    <a href="/plays">
+      Clear filters
+    </a>
+  </form>
+</article>
+
+<hr>
+
+<article>
+  <table>
+    <thead>
+      <tr>
+        <th>Side of Ball</th>
+        <th>Formation</th>      
+        <th>Formation Set</th>      
+        <th>Play</th>
+        <th>Play Art</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @list_of_plays.each do |a_play| %>
+        <tr>
+          <td>
+            <%= a_play.side_of_ball %>
+          </td>          
+          <td>
+            <a href="/formations/<%= a_play.formation.id %>">
+              <%= a_play.formation.formation_name %>
+            </a>
+          </td>        
+          <td>
+            <a href="/formation_sets/<%= a_play.formation_set.id %>">
+              <%= a_play.formation_set.formation_set %>
+            </a>
+          </td>
+          <td>
+            <a href="/plays/<%= a_play.id %>">
+              <%= a_play.play %>
+            </a>
+          </td>
+          <td>
+            <a href="/plays/<%= a_play.id %>">
+              <img src="<%= a_play.play_art %>" style="width:250px;">
+            </a>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</article>
+
+<hr>
+
+<!-- ✅ PAGINATION CONTROLS -->
+<article>
+  <% if @total_pages > 1 %>
+    <nav>
+      <%# previous page %>
+      <% if @page > 1 %>
+        <%= link_to "Previous", url_for(params.permit!.to_h.merge(page: @page - 1)), style: "margin-right: 10px;" %>
+      <% end %>
+
+      Page <%= @page %> of <%= @total_pages %>
+
+      <%# next page %>
+      <% if @page < @total_pages %>
+        <%= link_to "Next", url_for(params.permit!.to_h.merge(page: @page + 1)), style: "margin-left: 10px;" %>
+      <% end %>
+    </nav>
+  <% end %>
+</article>
+
+<hr>

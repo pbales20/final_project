@@ -1,0 +1,186 @@
+<h1>
+  Personnel group #<%= @the_personnel_group.id %> details
+</h1>
+
+<article>
+  <div>
+    <a href="/personnel_groups">
+      Go back
+    </a>
+  </div>
+
+  <div>
+    <a href="/delete_personnel_group/<%= @the_personnel_group.id %>">
+      Delete personnel group
+    </a>
+  </div>
+  <dl>
+    <dt>
+      Name
+    </dt>
+    <dd>
+      <%= @the_personnel_group.name %>
+    </dd>
+
+    <dt>
+      Number of tight ends
+    </dt>
+    <dd>
+      <%= @the_personnel_group.number_of_tight_ends %>
+    </dd>
+
+    <dt>
+      Number of running backs
+    </dt>
+    <dd>
+      <%= @the_personnel_group.number_of_running_backs %>
+    </dd>
+
+    <dt>
+      Number of wide receivers
+    </dt>
+    <dd>
+      <%= @the_personnel_group.number_of_wide_receivers %>
+    </dd>
+
+    <dt>
+      Number of defensive linemen
+    </dt>
+    <dd>
+      <%= @the_personnel_group.number_of_defensive_linemen %>
+    </dd>
+
+    <dt>
+      Number of linebackers
+    </dt>
+    <dd>
+      <%= @the_personnel_group.number_of_linebackers %>
+    </dd>
+
+    <dt>
+      Number of cornerbacks
+    </dt>
+    <dd>
+      <%= @the_personnel_group.number_of_cornerbacks %>
+    </dd>
+
+    <dt>
+      Number of safeties
+    </dt>
+    <dd>
+      <%= @the_personnel_group.number_of_safeties %>
+    </dd>
+
+    <dt>
+      Side of ball
+    </dt>
+    <dd>
+      <%= @the_personnel_group.side_of_ball %>
+    </dd>
+
+    <dt>
+      Created at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_personnel_group.created_at) %> ago
+    </dd>
+
+    <dt>
+      Updated at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_personnel_group.updated_at) %> ago
+    </dd>
+  </dl>
+</article>
+
+<hr>
+
+
+<article>
+  <header>
+    <h2>
+      Edit personnel group
+    </h2>
+  </header>
+
+  <form action="/modify_personnel_group/<%= @the_personnel_group.id %>"  method="post" >
+    <div>
+      <label for="name_box">
+        Name
+      </label>
+
+      <input type="text" id="name_box" name="query_name" value="<%= @the_personnel_group.name %>">
+    </div>
+
+    <div>
+      <label for="number_of_tight_ends_box">
+        Number of tight ends
+      </label>
+
+      <input type="text" id="number_of_tight_ends_box" name="query_number_of_tight_ends" value="<%= @the_personnel_group.number_of_tight_ends %>">
+    </div>
+
+    <div>
+      <label for="number_of_running_backs_box">
+        Number of running backs
+      </label>
+
+      <input type="text" id="number_of_running_backs_box" name="query_number_of_running_backs" value="<%= @the_personnel_group.number_of_running_backs %>">
+    </div>
+
+    <div>
+      <label for="number_of_wide_receivers_box">
+        Number of wide receivers
+      </label>
+
+      <input type="text" id="number_of_wide_receivers_box" name="query_number_of_wide_receivers" value="<%= @the_personnel_group.number_of_wide_receivers %>">
+    </div>
+
+    <div>
+      <label for="number_of_defensive_linemen_box">
+        Number of defensive linemen
+      </label>
+
+      <input type="text" id="number_of_defensive_linemen_box" name="query_number_of_defensive_linemen" value="<%= @the_personnel_group.number_of_defensive_linemen %>">
+    </div>
+
+    <div>
+      <label for="number_of_linebackers_box">
+        Number of linebackers
+      </label>
+
+      <input type="text" id="number_of_linebackers_box" name="query_number_of_linebackers" value="<%= @the_personnel_group.number_of_linebackers %>">
+    </div>
+
+    <div>
+      <label for="number_of_cornerbacks_box">
+        Number of cornerbacks
+      </label>
+
+      <input type="text" id="number_of_cornerbacks_box" name="query_number_of_cornerbacks" value="<%= @the_personnel_group.number_of_cornerbacks %>">
+    </div>
+
+    <div>
+      <label for="number_of_safeties_box">
+        Number of safeties
+      </label>
+
+      <input type="text" id="number_of_safeties_box" name="query_number_of_safeties" value="<%= @the_personnel_group.number_of_safeties %>">
+    </div>
+
+    <div>
+      <label for="side_of_ball_box">
+        Side of ball
+      </label>
+
+      <input type="text" id="side_of_ball_box" name="query_side_of_ball" value="<%= @the_personnel_group.side_of_ball %>">
+    </div>
+
+    <button type="submit">
+      Update personnel group
+    </button>
+  </form>
+</article>
+
+<hr>

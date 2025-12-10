@@ -1,0 +1,51 @@
+<h1>
+  List of all packages
+</h1>
+
+<hr>
+
+<article>
+  <header>
+    <h2>
+      Add a new package
+    </h2>
+  </header>
+
+  <form action="/insert_package" method="post">
+    <div>
+      <label for="formation_set_id_box">
+        Formation set
+      </label>
+
+      <input type="text" id="formation_set_id_box" name="query_formation_set_id">
+    </div>
+
+    <div>
+      <label for="name_box">
+        Name
+      </label>
+
+      <input type="text" id="name_box" name="query_name">
+    </div>
+
+    <button type="submit">
+      Create package
+    </button>
+  </form>
+</article>
+
+<hr>
+
+<article>
+  <ul>
+    <% @list_of_packages.each do |a_package| %>
+      <li>
+        <a href="/packages/<%= a_package.id %>">
+          Package #<%= a_package.id %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</article>
+
+<hr>

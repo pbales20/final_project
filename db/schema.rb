@@ -10,9 +10,142 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_13_202311) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_03_005129) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "concepts", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "side_of_ball"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "favorite_plays", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "play_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["play_id"], name: "index_favorite_plays_on_play_id"
+    t.index ["user_id"], name: "index_favorite_plays_on_user_id"
+  end
+
+  create_table "formation_sets", force: :cascade do |t|
+    t.integer "formation_id"
+    t.string "formation_set"
+    t.integer "personnel_group_id"
+    t.string "set_art"
+    t.string "description"
+    t.integer "plays_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "formations", force: :cascade do |t|
+    t.string "formation_name"
+    t.string "formation_art"
+    t.string "description"
+    t.string "side_of_ball"
+    t.integer "formation_sets_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "packages", force: :cascade do |t|
+    t.integer "formation_set_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "personnel_groups", force: :cascade do |t|
+    t.string "name"
+    t.integer "number_of_tight_ends"
+    t.integer "number_of_running_backs"
+    t.integer "number_of_wide_receivers"
+    t.integer "number_of_defensive_linemen"
+    t.string "number_of_linebackers"
+    t.integer "number_of_cornerbacks"
+    t.integer "number_of_safeties"
+    t.string "side_of_ball"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "playbooks", force: :cascade do |t|
+    t.string "playbook_name"
+    t.string "side_of_ball"
+    t.integer "user_id"
+    t.integer "scheme_id"
+    t.integer "plays_playbooks_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "playratings", force: :cascade do |t|
+    t.integer "play_id"
+    t.integer "user_id"
+    t.boolean "favorite"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "rating"
+  end
+
+  create_table "plays", force: :cascade do |t|
+    t.string "play"
+    t.integer "formation_set_id"
+    t.string "play_art"
+    t.string "side_of_ball"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "plays_concepts", force: :cascade do |t|
+    t.integer "play_id"
+    t.integer "concept_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "plays_playbooks", force: :cascade do |t|
+    t.integer "play_id"
+    t.integer "playbook_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "plays_playsheets", force: :cascade do |t|
+    t.integer "playsheet_id"
+    t.integer "play_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "playsheets", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "playsheet_name"
+    t.string "side_of_ball"
+    t.integer "playbook_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "schemes", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "side_of_ball"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "schemes_concepts", force: :cascade do |t|
+    t.integer "scheme_id"
+    t.integer "concept_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "solid_cable_messages", force: :cascade do |t|
     t.binary "channel", null: false
@@ -156,6 +289,36 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_13_202311) do
     t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
   end
 
+  create_table "teams", force: :cascade do |t|
+    t.string "name"
+    t.string "abbreviation"
+    t.string "logo"
+    t.string "city"
+    t.string "state"
+    t.integer "stadium_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "psn_username"
+    t.string "xbox_gamertag"
+    t.string "full_name"
+    t.integer "playsheets_count"
+    t.integer "playbooks_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  add_foreign_key "favorite_plays", "plays"
+  add_foreign_key "favorite_plays", "users"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

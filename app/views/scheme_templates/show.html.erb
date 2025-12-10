@@ -1,0 +1,96 @@
+<h1>
+  Scheme #<%= @the_scheme.id %> details
+</h1>
+
+<article>
+  <div>
+    <a href="/schemes">
+      Go back
+    </a>
+  </div>
+
+  <div>
+    <a href="/delete_scheme/<%= @the_scheme.id %>">
+      Delete scheme
+    </a>
+  </div>
+  <dl>
+    <dt>
+      Name
+    </dt>
+    <dd>
+      <%= @the_scheme.name %>
+    </dd>
+
+    <dt>
+      Description
+    </dt>
+    <dd>
+      <%= @the_scheme.description %>
+    </dd>
+
+    <dt>
+      Side of ball
+    </dt>
+    <dd>
+      <%= @the_scheme.side_of_ball %>
+    </dd>
+
+    <dt>
+      Created at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_scheme.created_at) %> ago
+    </dd>
+
+    <dt>
+      Updated at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_scheme.updated_at) %> ago
+    </dd>
+  </dl>
+</article>
+
+<hr>
+
+
+<article>
+  <header>
+    <h2>
+      Edit scheme
+    </h2>
+  </header>
+
+  <form action="/modify_scheme/<%= @the_scheme.id %>"  method="post" >
+    <div>
+      <label for="name_box">
+        Name
+      </label>
+
+      <input type="text" id="name_box" name="query_name" value="<%= @the_scheme.name %>">
+    </div>
+
+    <div>
+      <label for="description_box">
+        Description
+      </label>
+
+      <input type="text" id="description_box" name="query_description" value="<%= @the_scheme.description %>">
+    </div>
+
+    <div>
+      <label for="side_of_ball_box">
+        Side of ball
+      </label>
+
+      <input type="text" id="side_of_ball_box" name="query_side_of_ball" value="<%= @the_scheme.side_of_ball %>">
+    </div>
+
+    <button type="submit">
+      Update scheme
+    </button>
+  </form>
+</article>
+
+<hr>

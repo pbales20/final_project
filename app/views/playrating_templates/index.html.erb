@@ -1,0 +1,59 @@
+<h1>
+  List of all playratings
+</h1>
+
+<hr>
+
+<article>
+  <header>
+    <h2>
+      Add a new playrating
+    </h2>
+  </header>
+
+  <form action="/insert_playrating" method="post">
+    <div>
+      <label for="play_id_box">
+        Play
+      </label>
+
+      <input type="text" id="play_id_box" name="query_play_id">
+    </div>
+
+    <div>
+      <label for="user_id_box">
+        User
+      </label>
+
+      <input type="text" id="user_id_box" name="query_user_id">
+    </div>
+
+    <div>
+      <label for="favorite_box">
+        Favorite
+      </label>
+
+      <input type="text" id="favorite_box" name="query_favorite">
+    </div>
+
+    <button type="submit">
+      Create playrating
+    </button>
+  </form>
+</article>
+
+<hr>
+
+<article>
+  <ul>
+    <% @list_of_playratings.each do |a_playrating| %>
+      <li>
+        <a href="/playratings/<%= a_playrating.id %>">
+          Playrating #<%= a_playrating.id %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</article>
+
+<hr>

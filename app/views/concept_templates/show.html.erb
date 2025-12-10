@@ -1,0 +1,96 @@
+<h1>
+  Concept #<%= @the_concept.id %> details
+</h1>
+
+<article>
+  <div>
+    <a href="/concepts">
+      Go back
+    </a>
+  </div>
+
+  <div>
+    <a href="/delete_concept/<%= @the_concept.id %>">
+      Delete concept
+    </a>
+  </div>
+  <dl>
+    <dt>
+      Name
+    </dt>
+    <dd>
+      <%= @the_concept.name %>
+    </dd>
+
+    <dt>
+      Description
+    </dt>
+    <dd>
+      <%= @the_concept.description %>
+    </dd>
+
+    <dt>
+      Side of ball
+    </dt>
+    <dd>
+      <%= @the_concept.side_of_ball %>
+    </dd>
+
+    <dt>
+      Created at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_concept.created_at) %> ago
+    </dd>
+
+    <dt>
+      Updated at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_concept.updated_at) %> ago
+    </dd>
+  </dl>
+</article>
+
+<hr>
+
+
+<article>
+  <header>
+    <h2>
+      Edit concept
+    </h2>
+  </header>
+
+  <form action="/modify_concept/<%= @the_concept.id %>"  method="post" >
+    <div>
+      <label for="name_box">
+        Name
+      </label>
+
+      <input type="text" id="name_box" name="query_name" value="<%= @the_concept.name %>">
+    </div>
+
+    <div>
+      <label for="description_box">
+        Description
+      </label>
+
+      <input type="text" id="description_box" name="query_description" value="<%= @the_concept.description %>">
+    </div>
+
+    <div>
+      <label for="side_of_ball_box">
+        Side of ball
+      </label>
+
+      <input type="text" id="side_of_ball_box" name="query_side_of_ball" value="<%= @the_concept.side_of_ball %>">
+    </div>
+
+    <button type="submit">
+      Update concept
+    </button>
+  </form>
+</article>
+
+<hr>

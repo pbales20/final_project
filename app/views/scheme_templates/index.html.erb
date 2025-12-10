@@ -1,0 +1,59 @@
+<h1>
+  List of all schemes
+</h1>
+
+<hr>
+
+<article>
+  <header>
+    <h2>
+      Add a new scheme
+    </h2>
+  </header>
+
+  <form action="/insert_scheme" method="post">
+    <div>
+      <label for="name_box">
+        Name
+      </label>
+
+      <input type="text" id="name_box" name="query_name">
+    </div>
+
+    <div>
+      <label for="description_box">
+        Description
+      </label>
+
+      <input type="text" id="description_box" name="query_description">
+    </div>
+
+    <div>
+      <label for="side_of_ball_box">
+        Side of ball
+      </label>
+
+      <input type="text" id="side_of_ball_box" name="query_side_of_ball">
+    </div>
+
+    <button type="submit">
+      Create scheme
+    </button>
+  </form>
+</article>
+
+<hr>
+
+<article>
+  <ul>
+    <% @list_of_schemes.each do |a_scheme| %>
+      <li>
+        <a href="/schemes/<%= a_scheme.id %>">
+          <%= a_scheme.name %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</article>
+
+<hr>

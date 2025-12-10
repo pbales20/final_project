@@ -1,0 +1,82 @@
+<h1>
+  <%= @the_formation.formation_name %>
+</h1>
+
+<article>
+  <div>
+    <a href="/formations">
+      Go back
+    </a>
+  </div>
+
+  <dl>
+    <dt>
+      Formation name
+    </dt>
+    <dd>
+      <%= @the_formation.formation_name %>
+    </dd>
+
+    <dt>
+      Formation art
+    </dt>
+    <dd>
+      <%= @the_formation.formation_art %>
+    </dd>
+
+    <dt>
+      Description
+    </dt>
+    <dd>
+      <%= @the_formation.description %>
+    </dd>
+
+    <dt>
+      Side of ball
+    </dt>
+    <dd>
+      <%= @the_formation.side_of_ball %>
+    </dd>
+
+    <dt>
+      Formation sets count
+    </dt>
+    <dd>
+      <%= @the_formation.formation_sets_count %>
+    </dd>
+  </dl>
+</article>
+
+<hr>
+
+<hr>
+<article>
+  <table>
+    <thead>
+      <tr>
+        <th>Formation Set</th>
+        <th>Set Art</th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @list_of_formation_sets.each do |a_formation_set| %>
+        <tr>
+          <td>
+            <a href="/formation_sets/<%= a_formation_set.id %>">
+              <%= a_formation_set.formation_set %>
+            </a>
+          </td>
+          <td>
+              <a href="/formation_sets/<%= a_formation_set.id %>">
+              <img src="<%= a_formation_set.set_art %>" style="width:250px;">
+            </a>
+          </td>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</article>
+<hr>

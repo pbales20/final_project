@@ -1,0 +1,51 @@
+<h1>
+  List of all plays playbooks
+</h1>
+
+<hr>
+
+<article>
+  <header>
+    <h2>
+      Add a new plays playbook
+    </h2>
+  </header>
+
+  <form action="/insert_plays_playbook" method="post">
+    <div>
+      <label for="play_id_box">
+        Play
+      </label>
+
+      <input type="text" id="play_id_box" name="query_play_id">
+    </div>
+
+    <div>
+      <label for="playbook_id_box">
+        Playbook
+      </label>
+
+      <input type="text" id="playbook_id_box" name="query_playbook_id">
+    </div>
+
+    <button type="submit">
+      Create plays playbook
+    </button>
+  </form>
+</article>
+
+<hr>
+
+<article>
+  <ul>
+    <% @list_of_plays_playbooks.each do |a_plays_playbook| %>
+      <li>
+        <a href="/plays_playbooks/<%= a_plays_playbook.id %>">
+          Plays playbook #<%= a_plays_playbook.id %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</article>
+
+<hr>

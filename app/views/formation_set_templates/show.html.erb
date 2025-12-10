@@ -1,0 +1,87 @@
+<h1>
+  Formation set <%= @the_formation_set.formation_set %>
+</h1>
+
+<article>
+  <div>
+    <a href="/formation_sets">
+      Go back
+    </a>
+  </div>
+
+  <dl>
+    <dt>
+      Formation
+    </dt>
+    <dd>
+      <%= @the_formation_set.formation.formation_name %>
+    </dd>
+
+    <dt>
+      Formation set
+    </dt>
+    <dd>
+      <%= @the_formation_set.formation_set %>
+    </dd>
+
+    <dt>
+      Personnel group
+    </dt>
+    <dd>
+      <%= @the_formation_set.personnel_group_id %>
+    </dd>
+
+    <dt>
+      Set art
+    </dt>
+    <dd>
+      <img src="<%= @the_formation_set.set_art %>" style="width:250px;">
+    </dd>
+
+    <dt>
+      Description
+    </dt>
+    <dd>
+      <%= @the_formation_set.description %>
+    </dd>
+
+    <dt>
+      Plays count
+    </dt>
+    <dd>
+      <%= @the_formation_set.plays_count %>
+    </dd>
+  </dl>
+</article>
+
+<hr>
+<article>
+  <table>
+    <thead>
+      <tr>
+        <th>Play</th>
+        <th>Play Art</th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @list_of_plays.each do |a_play| %>
+        <tr>
+          <td>
+            <a href="/plays/<%= a_play.id %>">
+              <%= a_play.play %>
+            </a>
+          </td>
+          <td>
+              <a href="/plays/<%= a_play.id %>">
+              <img src="<%= a_play.play_art %>" style="width:250px;">
+            </a>
+          </td>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</article>
+<hr>

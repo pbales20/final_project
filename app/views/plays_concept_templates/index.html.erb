@@ -1,0 +1,51 @@
+<h1>
+  List of all plays concepts
+</h1>
+
+<hr>
+
+<article>
+  <header>
+    <h2>
+      Add a new plays concept
+    </h2>
+  </header>
+
+  <form action="/insert_plays_concept" method="post">
+    <div>
+      <label for="play_id_box">
+        Play
+      </label>
+
+      <input type="text" id="play_id_box" name="query_play_id">
+    </div>
+
+    <div>
+      <label for="concept_id_box">
+        Concept
+      </label>
+
+      <input type="text" id="concept_id_box" name="query_concept_id">
+    </div>
+
+    <button type="submit">
+      Create plays concept
+    </button>
+  </form>
+</article>
+
+<hr>
+
+<article>
+  <ul>
+    <% @list_of_plays_concepts.each do |a_plays_concept| %>
+      <li>
+        <a href="/plays_concepts/<%= a_plays_concept.id %>">
+          Plays concept #<%= a_plays_concept.id %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</article>
+
+<hr>

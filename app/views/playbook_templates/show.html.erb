@@ -1,0 +1,126 @@
+<h1>
+  Playbook #<%= @the_playbook.id %> details
+</h1>
+
+<article>
+  <div>
+    <a href="/playbooks">
+      Go back
+    </a>
+  </div>
+
+  <div>
+    <a href="/delete_playbook/<%= @the_playbook.id %>">
+      Delete playbook
+    </a>
+  </div>
+  <dl>
+    <dt>
+      Playbook name
+    </dt>
+    <dd>
+      <%= @the_playbook.playbook_name %>
+    </dd>
+
+    <dt>
+      Side of ball
+    </dt>
+    <dd>
+      <%= @the_playbook.side_of_ball %>
+    </dd>
+
+    <dt>
+      User
+    </dt>
+    <dd>
+      <%= @the_playbook.user_id %>
+    </dd>
+
+    <dt>
+      Scheme
+    </dt>
+    <dd>
+      <%= @the_playbook.scheme_id %>
+    </dd>
+
+    <dt>
+      Plays playbooks count
+    </dt>
+    <dd>
+      <%= @the_playbook.plays_playbooks_count %>
+    </dd>
+
+    <dt>
+      Created at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_playbook.created_at) %> ago
+    </dd>
+
+    <dt>
+      Updated at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_playbook.updated_at) %> ago
+    </dd>
+  </dl>
+</article>
+
+<hr>
+
+
+<article>
+  <header>
+    <h2>
+      Edit playbook
+    </h2>
+  </header>
+
+  <form action="/modify_playbook/<%= @the_playbook.id %>"  method="post" >
+    <div>
+      <label for="playbook_name_box">
+        Playbook name
+      </label>
+
+      <input type="text" id="playbook_name_box" name="query_playbook_name" value="<%= @the_playbook.playbook_name %>">
+    </div>
+
+    <div>
+      <label for="side_of_ball_box">
+        Side of ball
+      </label>
+
+      <input type="text" id="side_of_ball_box" name="query_side_of_ball" value="<%= @the_playbook.side_of_ball %>">
+    </div>
+
+    <div>
+      <label for="user_id_box">
+        User
+      </label>
+
+      <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_playbook.user_id %>">
+    </div>
+
+    <div>
+      <label for="scheme_id_box">
+        Scheme
+      </label>
+
+      <input type="text" id="scheme_id_box" name="query_scheme_id" value="<%= @the_playbook.scheme_id %>">
+    </div>
+
+    <div>
+      <label for="plays_playbooks_count_box">
+        Plays playbooks count
+      </label>
+
+      <input type="text" id="plays_playbooks_count_box" name="query_plays_playbooks_count" value="<%= @the_playbook.plays_playbooks_count %>">
+    </div>
+
+    <button type="submit">
+      Update playbook
+    </button>
+  </form>
+</article>
+
+<hr>

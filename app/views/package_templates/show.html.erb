@@ -1,0 +1,81 @@
+<h1>
+  Package #<%= @the_package.id %> details
+</h1>
+
+<article>
+  <div>
+    <a href="/packages">
+      Go back
+    </a>
+  </div>
+
+  <div>
+    <a href="/delete_package/<%= @the_package.id %>">
+      Delete package
+    </a>
+  </div>
+  <dl>
+    <dt>
+      Formation set
+    </dt>
+    <dd>
+      <%= @the_package.formation_set_id %>
+    </dd>
+
+    <dt>
+      Name
+    </dt>
+    <dd>
+      <%= @the_package.name %>
+    </dd>
+
+    <dt>
+      Created at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_package.created_at) %> ago
+    </dd>
+
+    <dt>
+      Updated at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_package.updated_at) %> ago
+    </dd>
+  </dl>
+</article>
+
+<hr>
+
+
+<article>
+  <header>
+    <h2>
+      Edit package
+    </h2>
+  </header>
+
+  <form action="/modify_package/<%= @the_package.id %>"  method="post" >
+    <div>
+      <label for="formation_set_id_box">
+        Formation set
+      </label>
+
+      <input type="text" id="formation_set_id_box" name="query_formation_set_id" value="<%= @the_package.formation_set_id %>">
+    </div>
+
+    <div>
+      <label for="name_box">
+        Name
+      </label>
+
+      <input type="text" id="name_box" name="query_name" value="<%= @the_package.name %>">
+    </div>
+
+    <button type="submit">
+      Update package
+    </button>
+  </form>
+</article>
+
+<hr>

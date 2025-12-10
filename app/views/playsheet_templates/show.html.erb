@@ -1,0 +1,211 @@
+<h1>
+  <%= @the_playsheet.playsheet_name %> details
+</h1>
+
+<article>
+  <div>
+    <a href="/playsheets">
+      Go back
+    </a>
+  </div>
+
+  <div>
+    <a href="/delete_playsheet/<%= @the_playsheet.id %>">
+      Delete playsheet
+    </a>
+  </div>
+  <dl>
+    <dt>
+      User
+    </dt>
+    <dd>
+      <%= @the_playsheet.user.email %>
+    </dd>
+
+    <dt>
+      Playsheet name
+    </dt>
+    <dd>
+      <%= @the_playsheet.playsheet_name %>
+    </dd>
+
+    <dt>
+      Side of ball
+    </dt>
+    <dd>
+      <%= @the_playsheet.side_of_ball %>
+    </dd>
+
+    <dt>
+      Playbook
+    </dt>
+    <dd>
+      <%= @the_playsheet.playbook.playbook_name %>
+    </dd>
+
+    <dt>
+      Created at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_playsheet.created_at) %> ago
+    </dd>
+
+    <dt>
+      Updated at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_playsheet.updated_at) %> ago
+    </dd>
+  </dl>
+</article>
+
+<article>
+  <header>
+  <h2>
+  Selected Plays in Playsheet
+  </h2>
+  </header>
+  <table>
+    <thead>
+      <tr>
+        <th>Formation</th>      
+        <th>Formation Set</th>      
+        <th>Play</th>
+        <th>Play Art</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @selected_plays.each do |a_play| %>
+        <tr>      
+          <td>
+            <a href="/formations/<%= a_play.formation.id %>">
+              <%= a_play.formation.formation_name %>
+            </a>
+          </td>        
+          <td>
+            <a href="/formation_sets/<%= a_play.formation_set.id %>">
+              <%= a_play.formation_set.formation_set %>
+            </a>
+          </td>
+          <td>
+            <a href="/plays/<%= a_play.id %>">
+              <%= a_play.play %>
+            </a>
+          </td>
+          <td>
+            <a href="/plays/<%= a_play.id %>">
+              <img src="<%= a_play.play_art %>" style="width:50px;">
+            </a>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</article>
+
+
+<hr>
+
+
+<article>
+  <header>
+    <h2>
+      Edit playsheet
+    </h2>
+  </header>
+
+  <form action="/modify_playsheet/<%= @the_playsheet.id %>"  method="post" >
+    <div>
+      <label for="user_id_box">
+        User
+      </label>
+
+      <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_playsheet.user_id %>">
+    </div>
+
+    <div>
+      <label for="playsheet_name_box">
+        Playsheet name
+      </label>
+
+      <input type="text" id="playsheet_name_box" name="query_playsheet_name" value="<%= @the_playsheet.playsheet_name %>">
+    </div>
+
+    <div>
+      <label for="side_of_ball_box">
+        Side of ball
+      </label>
+
+      <input type="text" id="side_of_ball_box" name="query_side_of_ball" value="<%= @the_playsheet.side_of_ball %>">
+    </div>
+
+    <div>
+      <label for="playbook_id_box">
+        Playbook
+      </label>
+
+      <input type="text" id="playbook_id_box" name="query_playbook_id" value="<%= @the_playsheet.playbook_id %>">
+    </div>
+
+    <button type="submit">
+      Update playsheet
+    </button>
+  </form>
+</article>
+
+<hr>
+
+<article>
+  <header>
+    <h2>Select plays to add to this playsheet</h2>
+  </header>
+
+  <form action="/playsheets/<%= @the_playsheet.id %>/add_plays" method="post">
+    <table>
+      <thead>
+        <tr>
+          <th>Add?</th>
+          <th>Formation</th>      
+          <th>Formation Set</th>      
+          <th>Play</th>
+          <th>Play Art</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @list_of_plays.each do |a_play| %>
+          <tr>
+            <td>
+              <input type="checkbox" name="play_ids[]" value="<%= a_play.id %>">
+            </td>
+            <td>
+              <a href="/formations/<%= a_play.formation.id %>">
+                <%= a_play.formation.formation_name %>
+              </a>
+            </td>        
+            <td>
+              <a href="/formation_sets/<%= a_play.formation_set.id %>">
+                <%= a_play.formation_set.formation_set %>
+              </a>
+            </td>
+            <td>
+              <a href="/plays/<%= a_play.id %>">
+                <%= a_play.play %>
+              </a>
+            </td>
+            <td>
+              <a href="/plays/<%= a_play.id %>">
+                <img src="<%= a_play.play_art %>" style="width:250px;">
+              </a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <button type="submit">
+      Add selected plays to playsheet
+    </button>
+  </form>
+</article>

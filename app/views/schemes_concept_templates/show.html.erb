@@ -1,0 +1,81 @@
+<h1>
+  Schemes concept #<%= @the_schemes_concept.id %> details
+</h1>
+
+<article>
+  <div>
+    <a href="/schemes_concepts">
+      Go back
+    </a>
+  </div>
+
+  <div>
+    <a href="/delete_schemes_concept/<%= @the_schemes_concept.id %>">
+      Delete schemes concept
+    </a>
+  </div>
+  <dl>
+    <dt>
+      Scheme
+    </dt>
+    <dd>
+      <%= @the_schemes_concept.scheme_id %>
+    </dd>
+
+    <dt>
+      Concept
+    </dt>
+    <dd>
+      <%= @the_schemes_concept.concept_id %>
+    </dd>
+
+    <dt>
+      Created at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_schemes_concept.created_at) %> ago
+    </dd>
+
+    <dt>
+      Updated at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_schemes_concept.updated_at) %> ago
+    </dd>
+  </dl>
+</article>
+
+<hr>
+
+
+<article>
+  <header>
+    <h2>
+      Edit schemes concept
+    </h2>
+  </header>
+
+  <form action="/modify_schemes_concept/<%= @the_schemes_concept.id %>"  method="post" >
+    <div>
+      <label for="scheme_id_box">
+        Scheme
+      </label>
+
+      <input type="text" id="scheme_id_box" name="query_scheme_id" value="<%= @the_schemes_concept.scheme_id %>">
+    </div>
+
+    <div>
+      <label for="concept_id_box">
+        Concept
+      </label>
+
+      <input type="text" id="concept_id_box" name="query_concept_id" value="<%= @the_schemes_concept.concept_id %>">
+    </div>
+
+    <button type="submit">
+      Update schemes concept
+    </button>
+  </form>
+</article>
+
+<hr>

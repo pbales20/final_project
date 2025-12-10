@@ -1,0 +1,40 @@
+<h1>
+  List of all formations
+</h1>
+
+<hr>
+
+<article>
+  <table>
+    <thead>
+      <tr>
+        <th>Side of Ball</th>
+        <th>Formation</th>      
+        <th>Formation Art</th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @list_of_formations.each do |a_formation| %>
+        <tr>
+          <td>
+            <%= a_formation.side_of_ball %>
+          </td>          
+          <td>
+           <a href="/formations/<%= a_formation.id %>">
+            <%= a_formation.formation_name %>
+          </td>        
+          <td>
+              <a href="/formations/<%= a_formation.id %>">
+              <img src="<%= a_formation.formation_art %>" style="width:250px;">
+            </a>
+          </td>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</article>
+
+<hr>

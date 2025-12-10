@@ -1,0 +1,31 @@
+<h1>
+  List of all playbooks
+</h1>
+
+<hr>
+
+<hr>
+<article>
+  <table>
+    <thead>
+      <tr>
+        <th>Side of Ball</th>
+        <th>Playbook</th>      
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @list_of_playbooks.each do |a_playbook| %>
+        <tr>
+          <td>
+            <%= a_playbook.side_of_ball %>
+          </td>          
+          <td>
+           <a href="/playbooks/<%= a_playbook.id %>">
+            <%= a_playbook.playbook_name %>
+          </td>        
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</article>

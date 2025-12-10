@@ -1,0 +1,152 @@
+<h1> 
+  List of all plays
+</h1>
+
+<article>
+  <%= search_form_for @q,
+        html: { data: { turbo_frame: "plays_list" } } do |f| %>
+    <p>Narrow results:</p>
+
+    <div>
+      <%= f.label :play_cont, "Name containing" %>
+      <%= f.text_field :play_cont,
+            placeholder: "Enter a few characters",
+            onchange: 'this.form.requestSubmit();' %>
+    </div>
+
+    <div>
+      <%= f.label :description_cont, "Description containing" %>
+      <%= f.text_field :description_cont,
+            placeholder: "Enter a few characters",
+            onchange: 'this.form.requestSubmit();' %>
+    </div>
+
+    <div>
+      <%= f.label :playbooks_id_eq, "Playbook" %>
+      <%= f.select :playbooks_id_eq,
+            options_from_collection_for_select(
+              @playbooks,
+              "id",
+              "playbook_name",
+              @q.playbooks_id_eq
+            ),
+            { include_blank: true },
+            { onchange: 'this.form.requestSubmit();' } %>
+    </div>
+
+    <div>
+      <%= f.label :formation_set_formation_id_eq, "Formation" %>
+      <%= f.select :formation_set_formation_id_eq,
+            options_from_collection_for_select(
+              @formations,
+              "id",
+              "formation_name",
+              @q.formation_set_formation_id_eq
+            ),
+            { include_blank: true },
+            { onchange: 'this.form.requestSubmit();' } %>
+    </div>
+
+    <div>
+      <%= f.label :formation_set_id_eq, "Formation Set" %>
+      <%= f.select :formation_set_id_eq,
+            options_from_collection_for_select(
+              @formation_sets,
+              "id",
+              "formation_set",
+              @q.formation_set_id_eq
+            ),
+            { include_blank: true },
+            { onchange: 'this.form.requestSubmit();' } %>
+    </div>
+
+<div>
+  <%= f.label :side_of_ball_eq, "Side of ball" %>
+  <%= f.select :side_of_ball_eq,
+        [["Offense", "Offense"], ["Defense", "Defense"]],
+        { include_blank: true },
+        {} %>
+</div>
+
+
+    <%# Optional now, but nice as a fallback %>
+    <%= f.submit :class => "btn btn-primary btn-block" %>
+    
+    <a href="/plays">Clear filters</a>
+  <% end %>
+</article>
+
+<hr>
+
+<article>
+  <%= turbo_frame_tag "plays_list" do %>
+    <table>
+      <thead>
+        <tr>
+          <th>Side of Ball</th>
+          <th>Formation</th>      
+          <th>Formation Set</th>      
+          <th>Play</th>
+          <th>Play Art</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @list_of_plays.each do |a_play| %>
+          <tr>
+            <td>
+              <%= a_play.side_of_ball %>
+            </td>
+            <td>
+              <a href="/formations/<%= a_play.formation.id %>">
+                <%= a_play.formation.formation_name %>
+              </a>
+            </td>
+            <td>
+              <a href="/formation_sets/<%= a_play.formation_set.id %>">
+                <%= a_play.formation_set.formation_set %>
+              </a>
+            </td>
+            <td>
+              <a href="/plays/<%= a_play.id %>">
+                <%= a_play.play %>
+              </a>
+            </td>
+            <td>
+              <a href="/plays/<%= a_play.id %>">
+                <img src="<%= a_play.play_art %>" style="width:250px;">
+              </a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <!-- ✅ PAGINATION CONTROLS -->
+    <article>
+      <% if @total_pages > 1 %>
+        <nav>
+          <%# previous page %>
+          <% if @page > 1 %>
+            <%= link_to "Previous",
+                  url_for(params.permit!.to_h.merge(page: @page - 1)),
+                  style: "margin-right: 10px;" %>
+          <% end %>
+
+          Page <%= @page %> of <%= @total_pages %>
+
+          <%# next page %>
+          <% if @page < @total_pages %>
+            <%= link_to "Next",
+                  url_for(params.permit!.to_h.merge(page: @page + 1)),
+                  style: "margin-left: 10px;" %>
+          <% end %>
+        </nav>
+      <% end %>
+    </article>
+  <% end %>
+</article>
+
+<hr>

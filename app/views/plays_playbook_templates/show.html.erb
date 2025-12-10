@@ -1,0 +1,81 @@
+<h1>
+  Plays playbook #<%= @the_plays_playbook.id %> details
+</h1>
+
+<article>
+  <div>
+    <a href="/plays_playbooks">
+      Go back
+    </a>
+  </div>
+
+  <div>
+    <a href="/delete_plays_playbook/<%= @the_plays_playbook.id %>">
+      Delete plays playbook
+    </a>
+  </div>
+  <dl>
+    <dt>
+      Play
+    </dt>
+    <dd>
+      <%= @the_plays_playbook.play_id %>
+    </dd>
+
+    <dt>
+      Playbook
+    </dt>
+    <dd>
+      <%= @the_plays_playbook.playbook_id %>
+    </dd>
+
+    <dt>
+      Created at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_plays_playbook.created_at) %> ago
+    </dd>
+
+    <dt>
+      Updated at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_plays_playbook.updated_at) %> ago
+    </dd>
+  </dl>
+</article>
+
+<hr>
+
+
+<article>
+  <header>
+    <h2>
+      Edit plays playbook
+    </h2>
+  </header>
+
+  <form action="/modify_plays_playbook/<%= @the_plays_playbook.id %>"  method="post" >
+    <div>
+      <label for="play_id_box">
+        Play
+      </label>
+
+      <input type="text" id="play_id_box" name="query_play_id" value="<%= @the_plays_playbook.play_id %>">
+    </div>
+
+    <div>
+      <label for="playbook_id_box">
+        Playbook
+      </label>
+
+      <input type="text" id="playbook_id_box" name="query_playbook_id" value="<%= @the_plays_playbook.playbook_id %>">
+    </div>
+
+    <button type="submit">
+      Update plays playbook
+    </button>
+  </form>
+</article>
+
+<hr>

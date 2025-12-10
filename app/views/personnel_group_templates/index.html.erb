@@ -1,0 +1,107 @@
+<h1>
+  List of all personnel groups
+</h1>
+
+<hr>
+
+<article>
+  <header>
+    <h2>
+      Add a new personnel group
+    </h2>
+  </header>
+
+  <form action="/insert_personnel_group" method="post">
+    <div>
+      <label for="name_box">
+        Name
+      </label>
+
+      <input type="text" id="name_box" name="query_name">
+    </div>
+
+    <div>
+      <label for="number_of_tight_ends_box">
+        Number of tight ends
+      </label>
+
+      <input type="text" id="number_of_tight_ends_box" name="query_number_of_tight_ends">
+    </div>
+
+    <div>
+      <label for="number_of_running_backs_box">
+        Number of running backs
+      </label>
+
+      <input type="text" id="number_of_running_backs_box" name="query_number_of_running_backs">
+    </div>
+
+    <div>
+      <label for="number_of_wide_receivers_box">
+        Number of wide receivers
+      </label>
+
+      <input type="text" id="number_of_wide_receivers_box" name="query_number_of_wide_receivers">
+    </div>
+
+    <div>
+      <label for="number_of_defensive_linemen_box">
+        Number of defensive linemen
+      </label>
+
+      <input type="text" id="number_of_defensive_linemen_box" name="query_number_of_defensive_linemen">
+    </div>
+
+    <div>
+      <label for="number_of_linebackers_box">
+        Number of linebackers
+      </label>
+
+      <input type="text" id="number_of_linebackers_box" name="query_number_of_linebackers">
+    </div>
+
+    <div>
+      <label for="number_of_cornerbacks_box">
+        Number of cornerbacks
+      </label>
+
+      <input type="text" id="number_of_cornerbacks_box" name="query_number_of_cornerbacks">
+    </div>
+
+    <div>
+      <label for="number_of_safeties_box">
+        Number of safeties
+      </label>
+
+      <input type="text" id="number_of_safeties_box" name="query_number_of_safeties">
+    </div>
+
+    <div>
+      <label for="side_of_ball_box">
+        Side of ball
+      </label>
+
+      <input type="text" id="side_of_ball_box" name="query_side_of_ball">
+    </div>
+
+    <button type="submit">
+      Create personnel group
+    </button>
+  </form>
+</article>
+
+<hr>
+
+<article>
+  <ul>
+    <% @list_of_personnel_groups.each do |a_personnel_group| %>
+      <li>
+        <a href="/personnel_groups/<%= a_personnel_group.id %>">
+          Personnel group #<%= a_personnel_group.id %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</article>
+
+<hr>

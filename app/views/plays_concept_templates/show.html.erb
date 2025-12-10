@@ -1,0 +1,81 @@
+<h1>
+  Plays concept #<%= @the_plays_concept.id %> details
+</h1>
+
+<article>
+  <div>
+    <a href="/plays_concepts">
+      Go back
+    </a>
+  </div>
+
+  <div>
+    <a href="/delete_plays_concept/<%= @the_plays_concept.id %>">
+      Delete plays concept
+    </a>
+  </div>
+  <dl>
+    <dt>
+      Play
+    </dt>
+    <dd>
+      <%= @the_plays_concept.play_id %>
+    </dd>
+
+    <dt>
+      Concept
+    </dt>
+    <dd>
+      <%= @the_plays_concept.concept_id %>
+    </dd>
+
+    <dt>
+      Created at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_plays_concept.created_at) %> ago
+    </dd>
+
+    <dt>
+      Updated at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_plays_concept.updated_at) %> ago
+    </dd>
+  </dl>
+</article>
+
+<hr>
+
+
+<article>
+  <header>
+    <h2>
+      Edit plays concept
+    </h2>
+  </header>
+
+  <form action="/modify_plays_concept/<%= @the_plays_concept.id %>"  method="post" >
+    <div>
+      <label for="play_id_box">
+        Play
+      </label>
+
+      <input type="text" id="play_id_box" name="query_play_id" value="<%= @the_plays_concept.play_id %>">
+    </div>
+
+    <div>
+      <label for="concept_id_box">
+        Concept
+      </label>
+
+      <input type="text" id="concept_id_box" name="query_concept_id" value="<%= @the_plays_concept.concept_id %>">
+    </div>
+
+    <button type="submit">
+      Update plays concept
+    </button>
+  </form>
+</article>
+
+<hr>

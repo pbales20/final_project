@@ -1,0 +1,61 @@
+<h1>
+  <%= @the_play.play %>
+</h1>
+
+<article>
+  <div>
+    <a href="/plays">
+      Go back
+    </a>
+  </div>
+
+  
+  <dl>
+    <dt>
+      Play
+    </dt>
+    <dd>
+      <%= @the_play.play %>
+    </dd>
+
+    <dt>
+      Formation
+    </dt>
+    <dd>
+      <%= @the_play.formation.formation_name %>
+    </dd>
+
+    <dt>
+      Formation set
+    </dt>
+    <dd>
+      <%= @the_play.formation_set.formation_set %>
+    </dd>
+
+    <dt>
+      Play art
+    </dt>
+    <dd>
+      <img src="<%= @the_play.play_art %>" style="width:250px;">
+    </dd>
+
+    <dt>
+      Side of ball
+    </dt>
+    <dd>
+      <%= @the_play.side_of_ball %>
+    </dd>
+
+    <dt>
+      Description
+    </dt>
+    <dd>
+      <%= @the_play.description %>
+    </dd>
+  </dl>
+</article>
+
+<hr>
+
+
+<hr>

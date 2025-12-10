@@ -1,0 +1,40 @@
+<h1>
+  List of all formation sets
+</h1>
+
+<article>
+  <table>
+    <thead>
+      <tr>
+        <th>Formation</th>      
+        <th>Formation Set</th>      
+        <th>Play</th>
+        <th>Play Art</th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @list_of_formation_sets.each do |a_formation_set| %>
+        <tr>        
+          <td>
+           <a href="/formations/<%= a_formation_set.formation.id %>">
+            <%= a_formation_set.formation.formation_name %>
+          </td>        
+          <td>
+            <a href="/formation_sets/<%= a_formation_set.id %>">
+              <%= a_formation_set.formation_set %>
+            </a>
+          </td>
+          <td>
+              <a href="/formation_sets/<%= a_formation_set.id %>">
+              <img src="<%= a_formation_set.set_art %>" style="width:250px;">
+            </a>
+          </td>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</article>
+<hr>
