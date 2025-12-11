@@ -9,11 +9,14 @@
     </a>
   </div>
 
+
+<% if @the_playsheet.user == current_user %>
   <div>
     <a href="/delete_playsheet/<%= @the_playsheet.id %>">
       Delete playsheet
     </a>
   </div>
+  <% end %>
   <dl>
     <dt>
       User
@@ -107,7 +110,7 @@
 
 <hr>
 
-
+<% if @the_playsheet.user == current_user %>
 <article>
   <header>
     <h2>
@@ -209,3 +212,4 @@
     </button>
   </form>
 </article>
+  <% end %>

@@ -67,7 +67,8 @@
       <tr>
         <th>Side of Ball</th>
         <th>Playsheet</th>      
-        <th>Playbook</th>      
+        <th>Playbook</th> 
+        <th>User</th>     
       </tr>
     </thead>
 
@@ -87,6 +88,16 @@
               <%= a_playsheet.playbook.playbook_name %>
             </a>
           </td>
+            <td>
+              <%= a_playsheet.user.email %>
+
+              <% if a_playsheet.user == current_user %>
+                <a href="/delete_playsheet/<%= a_playsheet.id %>">
+                  Delete playsheet
+                </a>
+              <% end %>
+
+            </td>
         </tr>
       <% end %>
     </tbody>

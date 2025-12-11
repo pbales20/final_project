@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # Routes for the Playrating resource:
-
+  devise_for :users
+  root to: "misc#homepage"
   # CREATE
   post("/insert_playrating", { :controller => "playratings", :action => "create" })
 
@@ -190,7 +191,6 @@ Rails.application.routes.draw do
 
   #------------------------------
 
-  devise_for :users
   # Routes for the Formation set resource:
 
   # CREATE
