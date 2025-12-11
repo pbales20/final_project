@@ -18,10 +18,10 @@ class FormationSet < ApplicationRecord
   has_many  :packages, class_name: "Package", foreign_key: "formation_set_id", dependent: :destroy
   belongs_to :personnel_group, required: true, class_name: "PersonnelGroup", foreign_key: "personnel_group_id"
    def self.ransackable_attributes(auth_object = nil)
-    ["formation_set", "description","formation_id"]
+    [ "formation_set", "description", "formation_id" ]
   end
   def self.ransackable_associations(auth_object = nil)
     # Let's allow filtering by the director and actors associations; but not by characters
-    ["play", "formation"]
+    [ "play", "formation" ]
   end
 end

@@ -1,6 +1,5 @@
 class PlaysheetsController < ApplicationController
   def index
-    
   @playbooks = Playbook.order(:playbook_name)
 
 

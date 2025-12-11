@@ -15,9 +15,9 @@ class FormationSetsController < ApplicationController
     matching_formation_sets = FormationSet.where({ :id => the_id })
 
     @the_formation_set = matching_formation_sets.at(0)
-    
-    
-    matching_plays = Play.where({ :formation_set_id => the_id})
+
+
+    matching_plays = Play.where({ :formation_set_id => the_id })
 
     @list_of_plays = matching_plays.order({ :created_at => :desc })
 

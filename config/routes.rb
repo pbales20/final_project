@@ -137,7 +137,7 @@ Rails.application.routes.draw do
 
   # CREATE
   post("/insert_plays_playsheet", { :controller => "plays_playsheets", :action => "create" })
-# BULK ADD PLAYS TO A PLAYSHEET
+  # BULK ADD PLAYS TO A PLAYSHEET
   post("/playsheets/:playsheet_id/add_plays", { :controller => "plays_playsheets", :action => "bulk_create" })
   # READ
   get("/plays_playsheets", { :controller => "plays_playsheets", :action => "index" })
@@ -265,7 +265,7 @@ Rails.application.routes.draw do
   # DELETE
   get("/delete_play/:path_id", { :controller => "plays", :action => "destroy" })
 
-    # Routes for the Favorite play resource:
+  # Routes for the Favorite play resource:
 
   #------------------------------
 

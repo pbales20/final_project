@@ -12,13 +12,13 @@
 #  updated_at           :datetime         not null
 #
 class Formation < ApplicationRecord
-  has_many  :formation_sets, class_name: "FormationSet", foreign_key: "formation_id", dependent: :destroy
+  has_many :formation_sets, class_name: "FormationSet", foreign_key: "formation_id", dependent: :destroy
   has_many :plays, through: :formation_sets
   def self.ransackable_attributes(auth_object = nil)
-    ["formation_name", "description", "side_of_ball"]
+    [ "formation_name", "description", "side_of_ball" ]
   end
   def self.ransackable_associations(auth_object = nil)
     # Let's allow filtering by the director and actors associations; but not by characters
-    ["play", "formation_set"]
+    [ "play", "formation_set" ]
   end
 end

@@ -2,11 +2,11 @@ class PlaysController < ApplicationController
 def ransackindex
   # 1) Base Ransack search on Play
   @q = Play.ransack(params[:q])
-  
+
   # 2) Apply all Ransack filters (play name, desc, side_of_ball, formation, formation_set, playbook, etc.)
   plays_scope = @q.result(distinct: true)
                   .includes(:formation_set, :formation, :playbooks)
-  
+
   # 3) Build dropdown options *from the filtered plays*
   formation_ids     = plays_scope.joins(:formation).distinct.pluck("formations.id")
   formation_set_ids = plays_scope.distinct.pluck(:formation_set_id)
@@ -52,14 +52,14 @@ def index
    if params[:formation_set_formation_id_eq].present?
     formation_sets = FormationSet
                         .where(formation_id: params[:formation_set_formation_id_eq])
-                        
-  else
+
+   else
     formation_sets = FormationSet.all
-  end
-  
+   end
+
   @playbooks       = playbooks.order(:playbook_name)
   @formations      = formations.order(:formation_name)
-  @formation_sets  = formation_sets.order(:formation_set)   
+  @formation_sets  = formation_sets.order(:formation_set)
 
   # Base query
   plays = Play.includes(:formation, :formation_set)
@@ -84,7 +84,7 @@ if params[:playbook_id].present?
   play_ids = PlaysPlaybook
                         .where(playbook_id: params[:playbook_id])
                         .select(:id)
-  
+
   # Filter plays to only those whose formation_set is in that list
   plays = plays.where(id: play_ids)
 else
@@ -102,7 +102,7 @@ end
   # ✅ Pagination
   @page     = params.fetch(:page, 1).to_i
   @per_page = 25  # change this if you want more/less per page
-  #make per page limit evenutally a selection by the user
+  # make per page limit evenutally a selection by the user
 
   @total_plays   = plays.count
   @total_pages   = (@total_plays.to_f / @per_page).ceil
@@ -130,14 +130,14 @@ enddef index
    if params[:formation_id].present?
     formation_sets = FormationSet
                         .where(formation_id: params[:formation_id])
-                        
-  else
+
+   else
     formation_sets = FormationSet.all
-  end
-  
+   end
+
   @playbooks       = playbooks.order(:playbook_name)
   @formations      = formations.order(:formation_name)
-  @formation_sets  = formation_sets.order(:formation_set)   
+  @formation_sets  = formation_sets.order(:formation_set)
 
   # Base query
   plays = Play.includes(:formation, :formation_set)
@@ -162,7 +162,7 @@ if params[:playbook_id].present?
   play_ids = PlaysPlaybook
                         .where(playbook_id: params[:playbook_id])
                         .select(:id)
-  
+
   # Filter plays to only those whose formation_set is in that list
   plays = plays.where(id: play_ids)
 else
@@ -180,7 +180,7 @@ end
   # ✅ Pagination
   @page     = params.fetch(:page, 1).to_i
   @per_page = 25  # change this if you want more/less per page
-  #make per page limit evenutally a selection by the user
+  # make per page limit evenutally a selection by the user
 
   @total_plays   = plays.count
   @total_pages   = (@total_plays.to_f / @per_page).ceil

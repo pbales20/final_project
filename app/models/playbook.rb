@@ -18,10 +18,10 @@ class Playbook < ApplicationRecord
   belongs_to :scheme, required: true, class_name: "Scheme", foreign_key: "scheme_id"
   has_many :plays, through: :plays_playbooks, source: :play
   def self.ransackable_attributes(_auth_object = nil)
-    ["id", "playbook_name", "side_of_ball"]
+    [ "id", "playbook_name", "side_of_ball" ]
   end
     def self.ransackable_associations(auth_object = nil)
     # Let's allow filtering by the director and actors associations; but not by characters
-    ["play", "playsheet", "plays_playbook"]
+    [ "play", "playsheet", "plays_playbook" ]
   end
 end

@@ -16,9 +16,8 @@ puts "Importing plays from #{file_path}..."
 CSV.foreach(file_path, headers: true) do |row|
   PlaysPlaybook.find_or_create_by!(
     play_id:            row["Play_Id"],
-    playbook_id: row["Playbook ID"],  
+    playbook_id: row["Playbook ID"],
   )
 end
 
 puts "Done importing formations!"
-

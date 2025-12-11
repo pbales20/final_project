@@ -13,8 +13,8 @@ class FormationsController < ApplicationController
     matching_formations = Formation.where({ :id => the_id })
 
     @the_formation = matching_formations.at(0)
-  
-    matching_formation_sets = FormationSet.where({ :formation_id => the_id})
+
+    matching_formation_sets = FormationSet.where({ :formation_id => the_id })
 
     @list_of_formation_sets = matching_formation_sets.order({ :created_at => :desc })
 

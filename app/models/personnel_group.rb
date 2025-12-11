@@ -16,5 +16,5 @@
 #  updated_at                  :datetime         not null
 #
 class PersonnelGroup < ApplicationRecord
-  has_many  :formation_sets, class_name: "FormationSet", foreign_key: "personnel_group_id", dependent: :destroy
+  has_many :formation_sets, class_name: "FormationSet", foreign_key: "personnel_group_id", dependent: :destroy
 end
