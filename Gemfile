@@ -16,6 +16,7 @@ gem "turbo-rails"
 gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
+gem "rails_db", "~> 2.5.0"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
@@ -85,7 +86,6 @@ group :development do
   gem "draft_generators", github: "firstdraft/draft_generators", branch: "bp-summer-2025-update"
   gem "haikunator"
   gem "pry-rails"
-  gem "rails_db", "~> 2.5.0"
   gem "rails-erd"
   gem "rufo"
 end
