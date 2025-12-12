@@ -9,15 +9,20 @@
 #   end
 require "csv"
 
-file_path = Rails.root.join("db", "seeds", "plays_playbooks.csv")
+csv_path = Rails.root.join("db", "seeds", "playbooks.csv")
 
-puts "Importing plays from #{file_path}..."
+CSV.foreach(csv_path, headers: true) do |row|
+  attrs = row.to_h
 
-CSV.foreach(file_path, headers: true) do |row|
-  PlaysPlaybook.find_or_create_by!(
-    play_id:            row["Play_Id"],
-    playbook_id: row["Playbook ID"],
+  playbook = Playbook.find_or_initialize_by(
+    playbook_name: attrs["playbook_name"],
+    side_of_ball:  attrs["side_of_ball"],
+    user_id:       attrs["user_id"]
   )
-end
 
-puts "Done importing formations!"
+  playbook.scheme_id = attrs["scheme_id"]
+
+  unless playbook.save
+    puts "FAILED: #{attrs.inspect} -> #{playbook.errors.full_messages.join(", ")}"
+  end
+end

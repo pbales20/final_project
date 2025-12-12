@@ -1,155 +1,156 @@
 playbook_name,side_of_ball,user_id,scheme_id
-Air Force,Offense,2,1
-Air Raid,Offense,2,1
-Akron,Offense,2,1
+Air Force,Offense,2,3
+Air Raid - Generic,Offense,2,2
+Akron,Offense,2,8
 Alabama,Offense,2,1
-Appalachian State,Offense,2,1
+App St,Offense,2,1
 Arizona,Offense,2,1
-Arizona State,Offense,2,1
+Arizona St,Offense,2,1
 Arkansas,Offense,2,1
-Arkansas State,Offense,2,1
-Army,Offense,2,1
-Auburn,Offense,2,1
-Ball State,Offense,2,1
-Baylor,Offense,2,1
-Boise State,Offense,2,1
-Boston College,Offense,2,1
+ARST,Offense,2,5
+Army,Offense,2,3
+Auburn,Offense,2,8
+Ball St,Offense,2,8
+Baylor,Offense,2,2
+Boise St,Offense,2,6
+BC,Offense,2,1
 Bowling Green,Offense,2,1
-Buffalo,Offense,2,1
-BYU,Offense,2,1
+Buffalo,Offense,2,5
+BYU,Offense,2,5
 Cal,Offense,2,1
-Central Michigan,Offense,2,1
-Charlotte,Offense,2,1
-Cincinnati,Offense,2,1
-Clemson,Offense,2,1
-Coastal Carolina,Offense,2,1
-Colorado,Offense,2,1
-Colorado State,Offense,2,1
-Duke,Offense,2,1
-East Carolina,Offense,2,1
-Eastern Michigan,Offense,2,1
-FIU,Offense,2,1
-Florida,Offense,2,1
-Florida Atlantic,Offense,2,1
-Florida International,Offense,2,1
-Florida State,Offense,2,1
-Fresno State,Offense,2,1
+CMU,Offense,2,9
+Charlotte,Offense,2,4
+Cincinnati,Offense,2,4
+Clemson,Offense,2,2
+CCU,Offense,2,5
+Colorado,Offense,2,8
+Colorado St,Offense,2,2
+Delaware,Offense,2,8
+Duke,Offense,2,10
+ECU,Offense,2,10
+Eastern Michigan,Offense,2,8
+FIU,Offense,2,5
+Fla Atlantic,Offense,2,2
+Florida,Offense,2,5
+Florida State,Offense,2,8
+Fresno State,Offense,2,8
 Georgia,Offense,2,1
-Georgia Southern,Offense,2,1
-Georgia State,Offense,2,1
-Georgia Tech,Offense,2,1
-Hawaii,Offense,2,1
-Houston,Offense,2,1
+Ga Southern,Offense,2,8
+Georgia St,Offense,2,1
+GT,Offense,2,5
+Hawai'i,Offense,2,7
+Houston,Offense,2,8
 Illinois,Offense,2,1
-Indiana,Offense,2,1
-Iowa,Offense,2,1
-Iowa State,Offense,2,1
-Jacksonville State,Offense,2,1
-James Madison,Offense,2,1
-Kansas,Offense,2,1
-Kansas State,Offense,2,1
-Kennesaw State,Offense,2,1
-Kent State,Offense,2,1
+Indiana,Offense,2,8
+Iowa,Offense,2,6
+Iowa St,Offense,2,5
+Jax St,Offense,2,8
+James Madison,Offense,2,8
+Kansas,Offense,2,8
+Kansas St,Offense,2,5
+KENN,Offense,2,10
+Kent St,Offense,2,8
 Kentucky,Offense,2,1
-Liberty,Offense,2,1
-Louisiana,Offense,2,1
-Louisiana Tech,Offense,2,1
+Liberty,Offense,2,9
+Louisiana,Offense,2,8
+Louisiana Tech,Offense,2,2
 Louisville,Offense,2,1
-LSU,Offense,2,1
-Marshall,Offense,2,1
-Maryland,Offense,2,1
-Memphis,Offense,2,1
-Miami,Offense,2,1
-Miami (Oh),Offense,2,1
+LSU,Offense,2,5
+Marshall,Offense,2,8
+Maryland,Offense,2,8
+Memphis,Offense,2,8
+Miami (FL),Offense,2,8
+Miami (OH),Offense,2,2
 Michigan,Offense,2,1
-Michigan State,Offense,2,1
-Middle Tennesee State,Offense,2,1
+Michigan St,Offense,2,6
+Middle Tenn,Offense,2,8
 Minnesota,Offense,2,1
-Mississippi State,Offense,2,1
-Missouri,Offense,2,1
-Multiple,Offense,2,1
-Navy,Offense,2,1
-NC State,Offense,2,1
+Miss St,Offense,2,5
+Missouri,Offense,2,4
+Missouri State,Offense,2,1
+Multiple Offense,Offense,2,1
+Navy,Offense,2,3
+NCST,Offense,2,5
 Nebraska,Offense,2,1
-Nevada,Offense,2,1
-New Mexico,Offense,2,1
-New Mexico State,Offense,2,1
+Nevada,Offense,2,8
+New Mexico,Offense,2,8
+New Mexico St,Offense,2,8
 North Carolina,Offense,2,1
-North Texas,Offense,2,1
-Northern Illinois,Offense,2,1
-Northwestern,Offense,2,1
-Notre Dame,Offense,2,1
-Ohio,Offense,2,1
-Ohio State,Offense,2,1
-Oklahoma,Offense,2,1
-Oklahoma State,Offense,2,1
-Old Dominion,Offense,2,1
-Ole Miss,Offense,2,1
-Option,Offense,2,1
-Oregon,Offense,2,1
-Oregon State,Offense,2,1
-Penn State,Offense,2,1
-Pistol,Offense,2,1
-Pittsburgh,Offense,2,1
-Power Spread,Offense,2,1
-Pro Style,Offense,2,1
-Purdue,Offense,2,1
-Rice,Offense,2,1
-Run & Shoot,Offense,2,1
-Rutgers,Offense,2,1
-Sam Houston State,Offense,2,1
-San Diego State,Offense,2,1
-San Jose State,Offense,2,1
-SMU,Offense,2,1
-South Alabama,Offense,2,1
-South Carolina,Offense,2,1
-Southern Miss,Offense,2,1
-Spread,Offense,2,1
-Spread Option,Offense,2,1
-Stanford,Offense,2,1
-Syracuse,Offense,2,1
-TCU,Offense,2,1
-Temple,Offense,2,1
-Tennessee,Offense,2,1
-Texas,Offense,2,1
-Texas A&M,Offense,2,1
-Texas State,Offense,2,1
-Texas Tech,Offense,2,1
-Toledo,Offense,2,1
-Troy,Offense,2,1
-Tulane,Offense,2,1
-Tulsa,Offense,2,1
-UAB,Offense,2,1
-UCF,Offense,2,1
-UCLA,Offense,2,1
-UCONN,Offense,2,1
-UL Monroe,Offense,2,1
-UMASS,Offense,2,1
-UNLV,Offense,2,1
-USC,Offense,2,1
-USF,Offense,2,1
-Utah,Offense,2,1
-Utah State,Offense,2,1
-UTEP,Offense,2,1
-UTSA,Offense,2,1
-Vanderbilt,Offense,2,1
-Veer & Shoot,Offense,2,1
-Virginia,Offense,2,1
-Virginia Tech,Offense,2,1
-Wake Forest,Offense,2,1
+North Texas,Offense,2,2
+Northern Ill,Offense,2,1
+Northwestern,Offense,2,8
+Notre Dame,Offense,2,5
+ODU,Offense,2,10
+Ohio,Offense,2,4
+Ohio State,Offense,2,8
+Oklahoma,Offense,2,2
+OKST,Offense,2,5
+Ole Miss,Offense,2,10
+Option - Generic,Offense,2,3
+Oregon,Offense,2,8
+Oregon St,Offense,2,5
+Penn St,Offense,2,5
+Pistol - Generic,Offense,2,4
+Pittsburgh,Offense,2,8
+Power Spread - Generic,Offense,2,5
+Pro Style - Generic,Offense,2,6
+Purdue,Offense,2,2
+Rice,Offense,2,9
+Run & Shoot - Generic,Offense,2,7
+Rutgers,Offense,2,8
+San Jose St,Offense,2,7
+SCAR,Offense,2,5
+SDSU,Offense,2,10
+SHSU,Offense,2,2
+SMU,Offense,2,8
+South Alabama,Offense,2,8
+Spread - Generic,Offense,2,8
+Spread Option - Generic,Offense,2,9
+Stanford,Offense,2,5
+Syracuse,Offense,2,8
+TCU,Offense,2,2
+Temple,Offense,2,8
+Tennessee,Offense,2,10
+Texas,Offense,2,8
+Texas A&M,Offense,2,5
+Texas St,Offense,2,10
+Texas Tech,Offense,2,10
+Toledo,Offense,2,8
+Troy,Offense,2,5
+Tulane,Offense,2,5
+Tulsa,Offense,2,8
+UAB,Offense,2,8
+UCF,Offense,2,8
+UCLA,Offense,2,8
+UConn,Offense,2,8
+ULM,Offense,2,8
+UMass,Offense,2,8
+UNLV,Offense,2,8
+USC,Offense,2,2
+USF,Offense,2,10
+USM,Offense,2,10
+Utah,Offense,2,8
+Utah St,Offense,2,8
+UTEP,Offense,2,2
+UTSA,Offense,2,5
+Vanderbilt,Offense,2,4
+Veer & Shoot - Generic,Offense,2,10
+Virginia,Offense,2,8
+Virginia Tech,Offense,2,8
+W. Kentucky,Offense,2,2
+W. Michigan,Offense,2,8
+Wake Forest,Offense,2,8
 Washington,Offense,2,1
-Washington State,Offense,2,1
-West Virginia,Offense,2,1
-Western Kentucky,Offense,2,1
-Western Michigan,Offense,2,1
+WAZZU,Offense,2,5
+West Virginia,Offense,2,8
 Wisconsin,Offense,2,1
 Wyoming,Offense,2,1
-3-2-6,Defense,2,2
-3-3-5,Defense,2,2
-3-3-5 Tite,Defense,2,2
-3-4,Defense,2,2
-3-4 Multiple,Defense,2,2
-4-2-5,Defense,2,2
-4-3,Defense,2,2
-4-3 Multiple,Defense,2,2
-Multiple D,Defense,2,2
+3-3-5 Defense,Defense,2,18
+3-2-6 Defense,Defense,2,15
+Base 3-4 Defense,Defense,2,19
+Base 4-3 Defense,Defense,2,17
+3-3-5 Tite Defense,Defense,2,14
+3-4 Multiple Defense,Defense,2,13
+4-2-5 Defense,Defense,2,11
+4-3 Multiple,Defense,2,12
+Multiple D,Defense,2,16
