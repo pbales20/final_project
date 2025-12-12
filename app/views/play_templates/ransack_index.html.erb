@@ -77,7 +77,7 @@
 </article>
 
 <hr>
-
+<form action="/update_favorites" method="post">
 <article>
   <%= turbo_frame_tag "plays_list" do %>
     <table>
@@ -88,6 +88,7 @@
           <th>Formation Set</th>      
           <th>Play</th>
           <th>Play Art</th>
+          <th>Favorite?</th>
         </tr>
       </thead>
 
@@ -117,11 +118,22 @@
                 <img src="<%= a_play.play_art %>" style="width:250px;">
               </a>
             </td>
+<td>
+  <%= check_box_tag(
+        "play_ids[]",
+        a_play.id,
+        @favorite_play_ids.include?(a_play.id)
+      ) %>
+</td>
+
           </tr>
         <% end %>
       </tbody>
     </table>
-
+    <button type="submit">
+      Update favorites
+    </button>
+  </form>
     <hr>
 
     <!-- ✅ PAGINATION CONTROLS -->

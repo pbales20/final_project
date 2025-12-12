@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_12_12_205748) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_12_221532) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -83,13 +83,24 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_12_205748) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "playfavorites", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "play_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["play_id"], name: "index_playfavorites_on_play_id"
+    t.index ["user_id", "play_id"], name: "index_playfavorites_on_user_id_and_play_id", unique: true
+    t.index ["user_id"], name: "index_playfavorites_on_user_id"
+  end
+
   create_table "playratings", force: :cascade do |t|
     t.integer "play_id"
     t.integer "user_id"
-    t.boolean "favorite"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "rating"
+    t.bigint "scenario_id", null: false
+    t.index ["scenario_id"], name: "index_playratings_on_scenario_id"
   end
 
   create_table "plays", force: :cascade do |t|
@@ -121,6 +132,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_12_205748) do
     t.integer "play_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "scenario_id"
+    t.index ["scenario_id"], name: "index_plays_playsheets_on_scenario_id"
   end
 
   create_table "playsheets", force: :cascade do |t|
@@ -327,6 +340,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_12_205748) do
 
   add_foreign_key "favorite_plays", "plays"
   add_foreign_key "favorite_plays", "users"
+  add_foreign_key "playfavorites", "plays"
+  add_foreign_key "playfavorites", "users"
+  add_foreign_key "playratings", "scenarios"
+  add_foreign_key "plays_playsheets", "scenarios"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

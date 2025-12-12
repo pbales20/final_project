@@ -27,6 +27,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many  :playsheets, class_name: "Playsheet", foreign_key: "user_id", dependent: :destroy
+  has_many :playfavorites, dependent: :destroy
+has_many :favorite_plays, through: :playfavorites, source: :play
+
   has_many  :playbooks, class_name: "Playbook", foreign_key: "user_id"
   has_many  :playratings, class_name: "Playrating", foreign_key: "user_id", dependent: :destroy
 end

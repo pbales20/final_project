@@ -1,4 +1,24 @@
 Rails.application.routes.draw do
+  # Routes for the Playfavorite resource:
+
+  # CREATE
+  post("/insert_playfavorite", { :controller => "playfavorites", :action => "create" })
+  post("/update_favorites", { :controller => "playfavorites", :action => "update_favorites" })
+  # READ
+  get("/playfavorites", { :controller => "playfavorites", :action => "index" })
+
+  get("/playfavorites/:path_id", { :controller => "playfavorites", :action => "show" })
+  
+
+  # UPDATE
+
+  post("/modify_playfavorite/:path_id", { :controller => "playfavorites", :action => "update" })
+
+  # DELETE
+  get("/delete_playfavorite/:path_id", { :controller => "playfavorites", :action => "destroy" })
+
+  #------------------------------
+
   # Routes for the Scenario resource:
 
   # CREATE

@@ -2,6 +2,11 @@ class PlaysController < ApplicationController
 def ransackindex
   # 1) Base Ransack search on Play
   @q = Play.ransack(params[:q])
+  @favorite_play_ids = Playfavorite
+  .where(user_id: current_user.id)
+  .pluck(:play_id)
+  .to_set
+
 
   # 2) Apply all Ransack filters (play name, desc, side_of_ball, formation, formation_set, playbook, etc.)
   plays_scope = @q.result(distinct: true)

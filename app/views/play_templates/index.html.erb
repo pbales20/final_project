@@ -80,7 +80,7 @@
 </article>
 
 <hr>
-
+<form action="/rate_plays" method="post">
 <article>
   <table>
     <thead>
@@ -90,6 +90,7 @@
         <th>Formation Set</th>      
         <th>Play</th>
         <th>Play Art</th>
+        <th>Favorite</th>
       </tr>
     </thead>
 
@@ -119,12 +120,18 @@
               <img src="<%= a_play.play_art %>" style="width:250px;">
             </a>
           </td>
+          <td>
+              <input type="checkbox" name="play_ids[]" value="<%= a_play.id %>">
+            </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </article>
-
+    <button type="submit">
+      Add selected plays to playsheet
+    </button>
+  </form>
 <hr>
 
 <!-- ✅ PAGINATION CONTROLS -->

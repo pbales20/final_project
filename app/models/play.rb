@@ -20,7 +20,11 @@ class Play < ApplicationRecord
   has_many :playbooks, through: :plays_playbooks, source: :playbook
   has_many :playsheets, through: :plays_playsheets, source: :playsheet
   has_many :concepts, through: :plays_concepts, source: :concept
-  has_many :playratings, class_name: "Playrating", foreign_key: "play_id", dependent: :destroy
+has_many :playfavorites, dependent: :destroy
+has_many :favorited_by_users, through: :playfavorites, source: :user
+
+has_many :favorited_by_users, through: :playfavorites, source: :user
+
   def self.ransackable_attributes(auth_object = nil)
     [ "play", "description", "side_of_ball", "formation_set_id" ]
   end

@@ -2,13 +2,21 @@
 #
 # Table name: playratings
 #
-#  id         :bigint           not null, primary key
-#  favorite   :boolean
-#  rating     :decimal(, )
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  play_id    :integer
-#  user_id    :integer
+#  id          :bigint           not null, primary key
+#  rating      :decimal(, )
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  play_id     :integer
+#  scenario_id :bigint           not null
+#  user_id     :integer
+#
+# Indexes
+#
+#  index_playratings_on_scenario_id  (scenario_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (scenario_id => scenarios.id)
 #
 class Playrating < ApplicationRecord
   belongs_to :play, required: true, class_name: "Play", foreign_key: "play_id"

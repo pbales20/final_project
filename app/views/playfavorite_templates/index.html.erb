@@ -1,0 +1,51 @@
+<h1>
+  List of all playfavorites
+</h1>
+
+<hr>
+
+<article>
+  <header>
+    <h2>
+      Add a new playfavorite
+    </h2>
+  </header>
+
+  <form action="/insert_playfavorite" method="post">
+    <div>
+      <label for="user_id_box">
+        User
+      </label>
+
+      <input type="text" id="user_id_box" name="query_user_id">
+    </div>
+
+    <div>
+      <label for="play_id_box">
+        Play
+      </label>
+
+      <input type="text" id="play_id_box" name="query_play_id">
+    </div>
+
+    <button type="submit">
+      Create playfavorite
+    </button>
+  </form>
+</article>
+
+<hr>
+
+<article>
+  <ul>
+    <% @list_of_playfavorites.each do |a_playfavorite| %>
+      <li>
+        <a href="/playfavorites/<%= a_playfavorite.id %>">
+          Playfavorite #<%= a_playfavorite.id %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</article>
+
+<hr>

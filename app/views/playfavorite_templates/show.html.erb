@@ -1,0 +1,81 @@
+<h1>
+  Playfavorite #<%= @the_playfavorite.id %> details
+</h1>
+
+<article>
+  <div>
+    <a href="/playfavorites">
+      Go back
+    </a>
+  </div>
+
+  <div>
+    <a href="/delete_playfavorite/<%= @the_playfavorite.id %>">
+      Delete playfavorite
+    </a>
+  </div>
+  <dl>
+    <dt>
+      User
+    </dt>
+    <dd>
+      <%= @the_playfavorite.user_id %>
+    </dd>
+
+    <dt>
+      Play
+    </dt>
+    <dd>
+      <%= @the_playfavorite.play_id %>
+    </dd>
+
+    <dt>
+      Created at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_playfavorite.created_at) %> ago
+    </dd>
+
+    <dt>
+      Updated at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_playfavorite.updated_at) %> ago
+    </dd>
+  </dl>
+</article>
+
+<hr>
+
+
+<article>
+  <header>
+    <h2>
+      Edit playfavorite
+    </h2>
+  </header>
+
+  <form action="/modify_playfavorite/<%= @the_playfavorite.id %>"  method="post" >
+    <div>
+      <label for="user_id_box">
+        User
+      </label>
+
+      <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_playfavorite.user_id %>">
+    </div>
+
+    <div>
+      <label for="play_id_box">
+        Play
+      </label>
+
+      <input type="text" id="play_id_box" name="query_play_id" value="<%= @the_playfavorite.play_id %>">
+    </div>
+
+    <button type="submit">
+      Update playfavorite
+    </button>
+  </form>
+</article>
+
+<hr>
