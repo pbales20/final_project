@@ -11,4 +11,5 @@
 class PlaysPlaysheet < ApplicationRecord
   belongs_to :play, required: true, class_name: "Play", foreign_key: "play_id"
   belongs_to :playsheet, required: true, class_name: "Playsheet", foreign_key: "playsheet_id"
+  belongs_to :scenario, class_name: "Scenario", foreign_key: "scenario_id"
 end

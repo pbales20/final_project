@@ -1,4 +1,23 @@
 Rails.application.routes.draw do
+  # Routes for the Scenario resource:
+
+  # CREATE
+  post("/insert_scenario", { :controller => "scenarios", :action => "create" })
+
+  # READ
+  get("/scenarios", { :controller => "scenarios", :action => "index" })
+
+  get("/scenarios/:path_id", { :controller => "scenarios", :action => "show" })
+
+  # UPDATE
+
+  post("/modify_scenario/:path_id", { :controller => "scenarios", :action => "update" })
+
+  # DELETE
+  get("/delete_scenario/:path_id", { :controller => "scenarios", :action => "destroy" })
+
+  #------------------------------
+
   # Routes for the Playrating resource:
   devise_for :users
   root to: "misc#homepage"

@@ -1,0 +1,96 @@
+<h1>
+  Scenario #<%= @the_scenario.id %> details
+</h1>
+
+<article>
+  <div>
+    <a href="/scenarios">
+      Go back
+    </a>
+  </div>
+
+  <div>
+    <a href="/delete_scenario/<%= @the_scenario.id %>">
+      Delete scenario
+    </a>
+  </div>
+  <dl>
+    <dt>
+      Name
+    </dt>
+    <dd>
+      <%= @the_scenario.name %>
+    </dd>
+
+    <dt>
+      Description
+    </dt>
+    <dd>
+      <%= @the_scenario.description %>
+    </dd>
+
+    <dt>
+      Side of ball
+    </dt>
+    <dd>
+      <%= @the_scenario.side_of_ball %>
+    </dd>
+
+    <dt>
+      Created at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_scenario.created_at) %> ago
+    </dd>
+
+    <dt>
+      Updated at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_scenario.updated_at) %> ago
+    </dd>
+  </dl>
+</article>
+
+<hr>
+
+
+<article>
+  <header>
+    <h2>
+      Edit scenario
+    </h2>
+  </header>
+
+  <form action="/modify_scenario/<%= @the_scenario.id %>"  method="post" >
+    <div>
+      <label for="name_box">
+        Name
+      </label>
+
+      <input type="text" id="name_box" name="query_name" value="<%= @the_scenario.name %>">
+    </div>
+
+    <div>
+      <label for="description_box">
+        Description
+      </label>
+
+      <input type="text" id="description_box" name="query_description" value="<%= @the_scenario.description %>">
+    </div>
+
+    <div>
+      <label for="side_of_ball_box">
+        Side of ball
+      </label>
+
+      <input type="text" id="side_of_ball_box" name="query_side_of_ball" value="<%= @the_scenario.side_of_ball %>">
+    </div>
+
+    <button type="submit">
+      Update scenario
+    </button>
+  </form>
+</article>
+
+<hr>

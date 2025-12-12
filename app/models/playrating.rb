@@ -13,6 +13,7 @@
 class Playrating < ApplicationRecord
   belongs_to :play, required: true, class_name: "Play", foreign_key: "play_id"
   belongs_to :user, required: true, class_name: "User", foreign_key: "user_id"
+  belongs_to :scenario, class_name: "Scenario", foreign_key: "scenario_id"
 
   validates :user_id, uniqueness: { scope: :play_id }
 
