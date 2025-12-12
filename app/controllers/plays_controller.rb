@@ -1,18 +1,22 @@
 class PlaysController < ApplicationController
 def ransackindex
-  # 1) Base Ransack search on Play
   @q = Play.ransack(params[:q])
+
   @favorite_play_ids = Playfavorite
-  .where(user_id: current_user.id)
-  .pluck(:play_id)
-  .to_set
+    .where(user_id: current_user.id)
+    .pluck(:play_id)
+    .to_set
 
-
-  # 2) Apply all Ransack filters (play name, desc, side_of_ball, formation, formation_set, playbook, etc.)
   plays_scope = @q.result(distinct: true)
                   .includes(:formation_set, :formation, :playbooks)
 
-  # 3) Build dropdown options *from the filtered plays*
+  # ✅ Favorites-only filter (new)
+  if params[:favorites_only] == "1"
+    plays_scope = plays_scope.where(
+      id: Playfavorite.where(user_id: current_user.id).select(:play_id)
+    )
+  end
+
   formation_ids     = plays_scope.joins(:formation).distinct.pluck("formations.id")
   formation_set_ids = plays_scope.distinct.pluck(:formation_set_id)
   playbook_ids      = plays_scope.joins(:playbooks).distinct.pluck("playbooks.id")
@@ -21,12 +25,11 @@ def ransackindex
   @formation_sets = FormationSet.where(id: formation_set_ids).order(:formation_set)
   @playbooks      = Playbook.where(id: playbook_ids).order(:playbook_name)
 
-  # 4) Pagination
   @page     = params.fetch(:page, 1).to_i
   @per_page = 25
 
-  @total_plays = plays_scope.count
-  @total_pages = (@total_plays.to_f / @per_page).ceil
+  @total_plays  = plays_scope.count
+  @total_pages  = (@total_plays.to_f / @per_page).ceil
 
   @list_of_plays = plays_scope
                      .order(:side_of_ball, :play)
@@ -35,6 +38,7 @@ def ransackindex
 
   render template: "play_templates/ransack_index"
 end
+
 
 
 

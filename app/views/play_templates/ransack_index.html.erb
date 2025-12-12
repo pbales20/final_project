@@ -60,6 +60,7 @@
             { onchange: 'this.form.requestSubmit();' } %>
     </div>
 
+
 <div>
   <%= f.label :side_of_ball_eq, "Side of ball" %>
   <%= f.select :side_of_ball_eq,
@@ -68,7 +69,11 @@
         {} %>
 </div>
 
-
+<div>
+  <%= check_box_tag "favorites_only", "1", params[:favorites_only] == "1",
+        onchange: "this.form.requestSubmit();" %>
+  <%= label_tag "favorites_only", "Favorites only" %>
+</div>
     <%# Optional now, but nice as a fallback %>
     <%= f.submit :class => "btn btn-primary btn-block" %>
     

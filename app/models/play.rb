@@ -30,6 +30,6 @@ has_many :favorited_by_users, through: :playfavorites, source: :user
   end
     def self.ransackable_associations(auth_object = nil)
     # Let's allow filtering by the director and actors associations; but not by characters
-    [ "formation", "formation_set", "playbooks", "plays_playbooks", "plays_playsheets", "playsheets" ]
+    [ "formation", "formation_set", "playbooks", "plays_playbooks", "plays_playsheets", "playsheets", "playfavorites" ]
   end
 end
