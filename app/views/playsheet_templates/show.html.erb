@@ -75,6 +75,7 @@
         <th>Formation Set</th>      
         <th>Play</th>
         <th>Play Art</th>
+        <th>Scenario</th>
       </tr>
     </thead>
 
@@ -101,6 +102,11 @@
               <img src="<%= a_play.play_art %>" style="width:50px;">
             </a>
           </td>
+    
+              <td>
+  <%= @playsheet_entries[a_play.id]&.scenario&.name || "—" %>
+</td>
+
         </tr>
       <% end %>
     </tbody>
@@ -158,58 +164,126 @@
 </article>
 
 <hr>
-
 <article>
-  <header>
-    <h2>Select plays to add to this playsheet</h2>
-  </header>
+  <%= search_form_for @q,
+        url: "/playsheets/#{@the_playsheet.id}",
+        method: :get,
+        html: { data: { turbo_frame: "plays_list" } } do |f| %>
 
-  <form action="/playsheets/<%= @the_playsheet.id %>/add_plays" method="post">
-    <table>
-      <thead>
-        <tr>
-          <th>Add?</th>
-          <th>Formation</th>      
-          <th>Formation Set</th>      
-          <th>Play</th>
-          <th>Play Art</th>
-        </tr>
-      </thead>
+    <p>Narrow results:</p>
 
-      <tbody>
-        <% @list_of_plays.each do |a_play| %>
-          <tr>
-            <td>
-              <input type="checkbox" name="play_ids[]" value="<%= a_play.id %>">
-            </td>
-            <td>
-              <a href="/formations/<%= a_play.formation.id %>">
-                <%= a_play.formation.formation_name %>
-              </a>
-            </td>        
-            <td>
-              <a href="/formation_sets/<%= a_play.formation_set.id %>">
-                <%= a_play.formation_set.formation_set %>
-              </a>
-            </td>
-            <td>
-              <a href="/plays/<%= a_play.id %>">
-                <%= a_play.play %>
-              </a>
-            </td>
-            <td>
-              <a href="/plays/<%= a_play.id %>">
-                <img src="<%= a_play.play_art %>" style="width:250px;">
-              </a>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <div>
+      <%= f.label :play_cont, "Name containing" %>
+      <%= f.text_field :play_cont, placeholder: "Enter a few characters",
+            onchange: "this.form.requestSubmit();" %>
+    </div>
 
-    <button type="submit">
-      Add selected plays to playsheet
-    </button>
-  </form>
-</article>
+    <div>
+      <%= f.label :description_cont, "Description containing" %>
+      <%= f.text_field :description_cont, placeholder: "Enter a few characters",
+            onchange: "this.form.requestSubmit();" %>
+    </div>
+
+    <div>
+      <%= f.label :formation_set_formation_id_eq, "Formation" %>
+      <%= f.select :formation_set_formation_id_eq,
+            options_from_collection_for_select(@formations, "id", "formation_name", @q.formation_set_formation_id_eq),
+            { include_blank: true },
+            { onchange: "this.form.requestSubmit();" } %>
+    </div>
+
+    <div>
+      <%= f.label :formation_set_id_eq, "Formation Set" %>
+      <%= f.select :formation_set_id_eq,
+            options_from_collection_for_select(@formation_sets, "id", "formation_set", @q.formation_set_id_eq),
+            { include_blank: true },
+            { onchange: "this.form.requestSubmit();" } %>
+    </div>
+
+    <div>
+      <%= check_box_tag "favorites_only", "1", params[:favorites_only] == "1",
+            onchange: "this.form.requestSubmit();" %>
+      <%= label_tag "favorites_only", "Favorites only" %>
+    </div>
+
+    <%= f.submit class: "btn btn-primary btn-block" %>
+
+    <%= link_to "Clear filters",
+          url_for({ q: {}, favorites_only: nil, page: nil, path_id: @the_playsheet.id }),
+          data: { turbo_frame: "plays_list" } %>
   <% end %>
+</article>
+
+<hr>
+<%= turbo_frame_tag "plays_list" do %>
+  <article>
+    <header>
+      <h2>Select plays to add to this playsheet</h2>
+    </header>
+
+    <form action="/playsheets/<%= @the_playsheet.id %>/add_plays" method="post" data-turbo-frame="_top">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <table>
+        <thead>
+          <tr>
+            <th>Add?</th>
+            <th>Formation</th>
+            <th>Formation Set</th>
+            <th>Play</th>
+            <th>Play Art</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @list_of_plays.each do |a_play| %>
+            <tr>
+         <td>
+  <%= select_tag(
+        "scenario_by_play[#{a_play.id}]",
+        options_from_collection_for_select(@scenarios, "id", "name"),
+        include_blank: "— Select scenario —",
+        disabled: @selected_play_ids.include?(a_play.id)
+      ) %>
+</td>
+
+
+              <td><%= a_play.formation&.formation_name %></td>
+              <td><%= a_play.formation_set&.formation_set %></td>
+              <td><%= a_play.play %></td>
+              <td>
+                <% if a_play.play_art.present? %>
+                  <img src="<%= a_play.play_art %>" style="width:250px;">
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <button type="submit">Add selected plays to playsheet</button>
+    </form>
+  </article>
+
+  <% if @total_pages.to_i > 1 %>
+    <article>
+      <nav>
+        <% if @page > 1 %>
+          <%= link_to "Previous",
+                url_for(params.permit!.to_h.merge(page: @page - 1)),
+                data: { turbo_frame: "plays_list" },
+                style: "margin-right: 10px;" %>
+        <% end %>
+
+        Page <%= @page %> of <%= @total_pages %>
+
+        <% if @page < @total_pages %>
+          <%= link_to "Next",
+                url_for(params.permit!.to_h.merge(page: @page + 1)),
+                data: { turbo_frame: "plays_list" },
+                style: "margin-left: 10px;" %>
+        <% end %>
+      </nav>
+    </article>
+  <% end %>
+<% end %>
+<% end %>

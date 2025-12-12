@@ -6,19 +6,27 @@ class PlaysPlaysheetsController < ApplicationController
 
     render({ :template => "plays_playsheet_templates/index" })
   end
- def bulk_create
-    playsheet = Playsheet.find(params.fetch("playsheet_id"))
-    play_ids  = params.fetch("play_ids", []) # array of selected play IDs
 
-    play_ids.each do |play_id|
-      PlaysPlaysheet.find_or_create_by!(
-        playsheet_id: playsheet.id,
-        play_id: play_id
-      )
+def bulk_create
+  playsheet = Playsheet.find(params.fetch("playsheet_id"))
+
+  scenario_by_play = params.fetch("scenario_by_play", {}) # { "1550" => "3", "1551" => "" }
+
+  scenario_by_play.each do |play_id, scenario_id|
+    next if scenario_id.blank?
+
+    PlaysPlaysheet.find_or_create_by!(
+      playsheet_id: playsheet.id,
+      play_id: play_id.to_i
+    ) do |pp|
+      pp.scenario_id = scenario_id.to_i
     end
-
-    redirect_to("/playsheets/#{playsheet.id}", notice: "Plays added to playsheet.")
   end
+
+  redirect_to("/playsheets/#{playsheet.id}", notice: "Plays added to playsheet.")
+end
+
+
   def show
     the_id = params.fetch("path_id")
 
