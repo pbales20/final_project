@@ -4,61 +4,70 @@
 
 <hr>
 
-<article>
-  <header>
-    <h2>
-      Add a new playsheet
-    </h2>
-  </header>
+<% if current_user.present? %>
+  <article>
+    <header>
+      <h2>
+        Add a new playsheet
+      </h2>
+    </header>
 
-  <form action="/insert_playsheet" method="post">
+    <form action="/insert_playsheet" method="post">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 
-    <div>
-      <label for="playsheet_name_box">
-        Playsheet name
-      </label>
+      <div>
+        <label for="playsheet_name_box">
+          Playsheet name
+        </label>
 
-      <input type="text" id="playsheet_name_box" name="query_playsheet_name">
-    </div>
+        <input type="text" id="playsheet_name_box" name="query_playsheet_name">
+      </div>
 
-    <!-- SIDE OF BALL DROPDOWN -->
-    <div>
-      <label for="side_of_ball_box">
-        Side of ball
-      </label>
+      <!-- SIDE OF BALL DROPDOWN -->
+      <div>
+        <label for="side_of_ball_box">
+          Side of ball
+        </label>
 
-      <select id="side_of_ball_box" name="query_side_of_ball">
-        <option value="">Select a side</option>
-        <option value="Offense">Offense</option>
-        <option value="Defense">Defense</option>
-      </select>
-    </div>
+        <select id="side_of_ball_box" name="query_side_of_ball">
+          <option value="">Select a side</option>
+          <option value="Offense">Offense</option>
+          <option value="Defense">Defense</option>
+        </select>
+      </div>
 
-    <!-- PLAYBOOK DROPDOWN (FILTERED BY SIDE VIA JS) -->
-    <div>
-      <label for="playbook_id_box">
-        Playbook
-      </label>
+      <!-- PLAYBOOK DROPDOWN (FILTERED BY SIDE VIA JS) -->
+      <div>
+        <label for="playbook_id_box">
+          Playbook
+        </label>
 
-      <select id="playbook_id_box" name="query_playbook_id">
-        <option value="">Select a playbook</option>
-        <% @playbooks.each do |pb| %>
-          <option 
-            value="<%= pb.id %>" 
-            data-side="<%= pb.side_of_ball %>">
-            <%= pb.playbook_name %> (<%= pb.side_of_ball %>)
-          </option>
-        <% end %>
-      </select>
-    </div>
+        <select id="playbook_id_box" name="query_playbook_id">
+          <option value="">Select a playbook</option>
+          <% @playbooks.each do |pb| %>
+            <option value="<%= pb.id %>" data-side="<%= pb.side_of_ball %>">
+              <%= pb.playbook_name %> (<%= pb.side_of_ball %>)
+            </option>
+          <% end %>
+        </select>
+      </div>
 
-    <button type="submit">
-      Create playsheet
-    </button>
-  </form>
-</article>
+      <button type="submit">
+        Create playsheet
+      </button>
+    </form>
+  </article>
+<% else %>
+  <article>
+    <p><strong>Sign in to create a playsheet.</strong></p>
+    <p>
+      <a href="/users/sign_in">Sign in</a>
+      or
+      <a href="/users/sign_up">Create an account</a>
+    </p>
+  </article>
+<% end %>
 
-<hr>
 
 
 <article>
