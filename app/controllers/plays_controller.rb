@@ -2,20 +2,23 @@ class PlaysController < ApplicationController
 def ransackindex
   @q = Play.ransack(params[:q])
 
-  @favorite_play_ids = Playfavorite
-    .where(user_id: current_user.id)
-    .pluck(:play_id)
-    .to_set
+@favorite_play_ids =
+  if current_user.present?
+    Playfavorite.where(user_id: current_user.id).pluck(:play_id).to_set
+  else
+    Set.new
+  end
 
   plays_scope = @q.result(distinct: true)
                   .includes(:formation_set, :formation, :playbooks)
 
   # ✅ Favorites-only filter (new)
-  if params[:favorites_only] == "1"
-    plays_scope = plays_scope.where(
-      id: Playfavorite.where(user_id: current_user.id).select(:play_id)
-    )
-  end
+if params[:favorites_only] == "1" && current_user.present?
+  plays_scope = plays_scope.where(
+    id: Playfavorite.where(user_id: current_user.id).select(:play_id)
+  )
+end
+
 
   formation_ids     = plays_scope.joins(:formation).distinct.pluck("formations.id")
   formation_set_ids = plays_scope.distinct.pluck(:formation_set_id)
