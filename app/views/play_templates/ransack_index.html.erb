@@ -68,12 +68,13 @@
         { include_blank: true },
         {} %>
 </div>
-
+<% if current_user.present? %>
 <div>
   <%= check_box_tag "favorites_only", "1", params[:favorites_only] == "1",
         onchange: "this.form.requestSubmit();" %>
   <%= label_tag "favorites_only", "Favorites only" %>
 </div>
+<% end %>
     <%# Optional now, but nice as a fallback %>
     <%= f.submit :class => "btn btn-primary btn-block" %>
     
@@ -93,7 +94,9 @@
           <th>Formation Set</th>      
           <th>Play</th>
           <th>Play Art</th>
+          <% if current_user.present? %>
           <th>Favorite?</th>
+          <% end %>
         </tr>
       </thead>
 
@@ -123,6 +126,7 @@
                 <img src="<%= a_play.play_art %>" style="width:250px;">
               </a>
             </td>
+            <% if current_user.present? %>
 <td>
   <%= check_box_tag(
         "play_ids[]",
@@ -130,7 +134,7 @@
         @favorite_play_ids.include?(a_play.id)
       ) %>
 </td>
-
+        <% end %>
           </tr>
         <% end %>
       </tbody>
