@@ -1,86 +1,87 @@
-<h1> 
-  List of all plays
-</h1>
+<h1>Browse plays</h1>
 
-<article>
+<section class="play-search">
   <%= search_form_for @q,
-        html: { data: { turbo_frame: "plays_list" } } do |f| %>
-    <p>Narrow results:</p>
+        html: { data: { turbo_frame: "plays_list" }, class: "play-search__form" } do |f| %>
+    <p class="lead">Use the quick search boxes or narrow results with filters below.</p>
 
-    <div>
-      <%= f.label :play_cont, "Name containing" %>
-      <%= f.text_field :play_cont,
-            placeholder: "Enter a few characters",
-            onchange: 'this.form.requestSubmit();' %>
+    <div class="play-search__grid">
+      <div class="play-search__field">
+        <%= f.label :play_cont, "Name contains" %>
+        <%= f.text_field :play_cont,
+              placeholder: "e.g. power, mesh",
+              oninput: 'this.form.requestSubmit();' %>
+      </div>
+
+      <div class="play-search__field">
+        <%= f.label :description_cont, "Description contains" %>
+        <%= f.text_field :description_cont,
+              placeholder: "keywords or tags",
+              oninput: 'this.form.requestSubmit();' %>
+      </div>
+
+      <div class="play-search__field">
+        <%= f.label :side_of_ball_eq, "Side of ball" %>
+        <%= f.select :side_of_ball_eq,
+              [["Offense", "Offense"], ["Defense", "Defense"]],
+              { include_blank: "Any side" },
+              { onchange: 'this.form.requestSubmit();' } %>
+      </div>
+
+      <div class="play-search__field">
+        <%= f.label :formation_set_formation_id_eq, "Formation" %>
+        <%= f.select :formation_set_formation_id_eq,
+              options_from_collection_for_select(
+                @formations,
+                "id",
+                "formation_name",
+                @q.formation_set_formation_id_eq
+              ),
+              { include_blank: "Any formation" },
+              { onchange: 'this.form.requestSubmit();' } %>
+      </div>
+
+      <div class="play-search__field">
+        <%= f.label :formation_set_id_eq, "Formation set" %>
+        <%= f.select :formation_set_id_eq,
+              options_from_collection_for_select(
+                @formation_sets,
+                "id",
+                "formation_set",
+                @q.formation_set_id_eq
+              ),
+              { include_blank: "Any set" },
+              { onchange: 'this.form.requestSubmit();' } %>
+      </div>
+
+      <div class="play-search__field">
+        <%= f.label :playbooks_id_eq, "Playbook" %>
+        <%= f.select :playbooks_id_eq,
+              options_from_collection_for_select(
+                @playbooks,
+                "id",
+                "playbook_name",
+                @q.playbooks_id_eq
+              ),
+              { include_blank: "Any playbook" },
+              { onchange: 'this.form.requestSubmit();' } %>
+      </div>
     </div>
 
-    <div>
-      <%= f.label :description_cont, "Description containing" %>
-      <%= f.text_field :description_cont,
-            placeholder: "Enter a few characters",
-            onchange: 'this.form.requestSubmit();' %>
+    <div class="play-search__actions">
+      <% if current_user.present? %>
+        <label class="favorite-toggle">
+          <%= check_box_tag "favorites_only", "1", params[:favorites_only] == "1",
+                onchange: "this.form.requestSubmit();" %>
+          Favorites only
+        </label>
+      <% end %>
+
+      <%= f.submit "Update results", class: "btn btn-primary" %>
+      <%= link_to "Clear filters", "/plays", class: "clear-link" %>
     </div>
-
-    <div>
-      <%= f.label :playbooks_id_eq, "Playbook" %>
-      <%= f.select :playbooks_id_eq,
-            options_from_collection_for_select(
-              @playbooks,
-              "id",
-              "playbook_name",
-              @q.playbooks_id_eq
-            ),
-            { include_blank: true },
-            { onchange: 'this.form.requestSubmit();' } %>
-    </div>
-
-    <div>
-      <%= f.label :formation_set_formation_id_eq, "Formation" %>
-      <%= f.select :formation_set_formation_id_eq,
-            options_from_collection_for_select(
-              @formations,
-              "id",
-              "formation_name",
-              @q.formation_set_formation_id_eq
-            ),
-            { include_blank: true },
-            { onchange: 'this.form.requestSubmit();' } %>
-    </div>
-
-    <div>
-      <%= f.label :formation_set_id_eq, "Formation Set" %>
-      <%= f.select :formation_set_id_eq,
-            options_from_collection_for_select(
-              @formation_sets,
-              "id",
-              "formation_set",
-              @q.formation_set_id_eq
-            ),
-            { include_blank: true },
-            { onchange: 'this.form.requestSubmit();' } %>
-    </div>
-
-
-<div>
-  <%= f.label :side_of_ball_eq, "Side of ball" %>
-  <%= f.select :side_of_ball_eq,
-        [["Offense", "Offense"], ["Defense", "Defense"]],
-        { include_blank: true },
-        {} %>
-</div>
-<% if current_user.present? %>
-<div>
-  <%= check_box_tag "favorites_only", "1", params[:favorites_only] == "1",
-        onchange: "this.form.requestSubmit();" %>
-  <%= label_tag "favorites_only", "Favorites only" %>
-</div>
-<% end %>
-    <%# Optional now, but nice as a fallback %>
-    <%= f.submit :class => "btn btn-primary btn-block" %>
-    
-    <a href="/plays">Clear filters</a>
   <% end %>
-</article>
+</section>
 
 <hr>
 <form action="/update_favorites" method="post">
