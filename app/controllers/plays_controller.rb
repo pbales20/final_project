@@ -35,8 +35,8 @@ def ransackindex
     )
   end
 
-  formation_scope     = scoped_options.call(:formation_set_formation_id_eq)
-  formation_set_scope = scoped_options.call(:formation_set_id_eq)
+  formation_scope     = scoped_options.call(:formation_set_formation_id_in)
+  formation_set_scope = scoped_options.call(:formation_set_id_in)
   playbook_scope      = scoped_options.call(:playbooks_id_eq)
 
   formation_ids     = formation_scope.joins(:formation).distinct.pluck("formations.id")

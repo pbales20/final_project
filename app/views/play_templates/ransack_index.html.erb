@@ -29,29 +29,39 @@
       </div>
 
       <div class="play-search__field">
-        <%= f.label :formation_set_formation_id_eq, "Formation" %>
-        <%= f.select :formation_set_formation_id_eq,
+        <%= f.label :formation_set_formation_id_in, "Formation (multi-select)" %>
+        <%= f.select :formation_set_formation_id_in,
               options_from_collection_for_select(
                 @formations,
                 "id",
                 "formation_name",
-                @q.formation_set_formation_id_eq
+                Array(@q.formation_set_formation_id_in).reject(&:blank?)
               ),
-              { include_blank: "Any formation" },
-              { onchange: 'this.form.requestSubmit();' } %>
+              {},
+              {
+                multiple: true,
+                size: 6,
+                onchange: 'this.form.requestSubmit();'
+              } %>
+        <small>Hold Cmd/Ctrl to pick several formations.</small>
       </div>
 
       <div class="play-search__field">
-        <%= f.label :formation_set_id_eq, "Formation set" %>
-        <%= f.select :formation_set_id_eq,
+        <%= f.label :formation_set_id_in, "Formation set (multi-select)" %>
+        <%= f.select :formation_set_id_in,
               options_from_collection_for_select(
                 @formation_sets,
                 "id",
                 "formation_set",
-                @q.formation_set_id_eq
+                Array(@q.formation_set_id_in).reject(&:blank?)
               ),
-              { include_blank: "Any set" },
-              { onchange: 'this.form.requestSubmit();' } %>
+              {},
+              {
+                multiple: true,
+                size: 6,
+                onchange: 'this.form.requestSubmit();'
+              } %>
+        <small>Hold Cmd/Ctrl to pick several sets.</small>
       </div>
 
       <div class="play-search__field">
