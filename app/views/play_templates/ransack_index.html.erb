@@ -28,48 +28,110 @@
               { onchange: 'this.form.requestSubmit();' } %>
       </div>
 
-      <div class="play-search__field">
+      <% formation_selected_ids = Array(@q.formation_set_formation_id_in).reject(&:blank?).map(&:to_i) %>
+      <% formation_selected_names = @formations.select { |form| formation_selected_ids.include?(form.id) }.map(&:formation_name) %>
+      <% formation_summary =
+           if formation_selected_names.empty?
+             "Any formation"
+           elsif formation_selected_names.length <= 2
+             formation_selected_names.join(", ")
+           else
+             "#{formation_selected_names.first(2).join(", ")} +#{formation_selected_names.length - 2} more"
+           end %>
+      <div class="play-search__field"
+           data-controller="dropdown-multi-select"
+           data-dropdown-multi-select-default-label-value="Any formation">
         <%= f.label :formation_set_formation_id_in, "Formation (multi-select)" %>
-        <%= f.select :formation_set_formation_id_in,
-              options_from_collection_for_select(
-                @formations,
-                "id",
-                "formation_name",
-                Array(@q.formation_set_formation_id_in).reject(&:blank?)
-              ),
-              {},
-              {
-                multiple: true,
-                size: 1,
-                data: {
-                  controller: "multi-select",
-                  action: "focus->multi-select#expand blur->multi-select#collapse",
-                  multi_select_expanded_size_value: 6
-                },
-                onchange: 'this.form.requestSubmit();'
-              } %>
+        <button type="button"
+                class="multi-select-toggle"
+                data-action="dropdown-multi-select#toggle"
+                data-dropdown-multi-select-target="toggle">
+          <span data-dropdown-multi-select-target="summary"><%= formation_summary %></span>
+          <span class="multi-select-caret">▾</span>
+        </button>
+        <div class="multi-select-panel"
+             data-dropdown-multi-select-target="panel"
+             hidden>
+          <div class="multi-select-panel__actions">
+            <button type="button"
+                    class="link-button"
+                    data-action="dropdown-multi-select#clear">
+              Clear all
+            </button>
+          </div>
+          <div class="multi-select-options">
+            <%= f.collection_check_boxes(
+                  :formation_set_formation_id_in,
+                  @formations,
+                  :id,
+                  :formation_name,
+                  { include_hidden: false }
+                ) do |b| %>
+              <label class="multi-select-option">
+                <%= b.check_box(
+                      data: {
+                        action: "change->dropdown-multi-select#changed",
+                        option_label: b.text
+                      }
+                    ) %>
+                <span><%= b.text %></span>
+              </label>
+            <% end %>
+          </div>
+        </div>
       </div>
 
-      <div class="play-search__field">
+      <% formation_set_selected_ids = Array(@q.formation_set_id_in).reject(&:blank?).map(&:to_i) %>
+      <% formation_set_selected_names = @formation_sets.select { |set| formation_set_selected_ids.include?(set.id) }.map(&:formation_set) %>
+      <% formation_set_summary =
+           if formation_set_selected_names.empty?
+             "Any formation set"
+           elsif formation_set_selected_names.length <= 2
+             formation_set_selected_names.join(", ")
+           else
+             "#{formation_set_selected_names.first(2).join(", ")} +#{formation_set_selected_names.length - 2} more"
+           end %>
+      <div class="play-search__field"
+           data-controller="dropdown-multi-select"
+           data-dropdown-multi-select-default-label-value="Any formation set">
         <%= f.label :formation_set_id_in, "Formation set (multi-select)" %>
-        <%= f.select :formation_set_id_in,
-              options_from_collection_for_select(
-                @formation_sets,
-                "id",
-                "formation_set",
-                Array(@q.formation_set_id_in).reject(&:blank?)
-              ),
-              {},
-              {
-                multiple: true,
-                size: 1,
-                data: {
-                  controller: "multi-select",
-                  action: "focus->multi-select#expand blur->multi-select#collapse",
-                  multi_select_expanded_size_value: 6
-                },
-                onchange: 'this.form.requestSubmit();'
-              } %>
+        <button type="button"
+                class="multi-select-toggle"
+                data-action="dropdown-multi-select#toggle"
+                data-dropdown-multi-select-target="toggle">
+          <span data-dropdown-multi-select-target="summary"><%= formation_set_summary %></span>
+          <span class="multi-select-caret">▾</span>
+        </button>
+        <div class="multi-select-panel"
+             data-dropdown-multi-select-target="panel"
+             hidden>
+          <div class="multi-select-panel__actions">
+            <button type="button"
+                    class="link-button"
+                    data-action="dropdown-multi-select#clear">
+              Clear all
+            </button>
+          </div>
+          <div class="multi-select-options">
+            <%= f.collection_check_boxes(
+                  :formation_set_id_in,
+                  @formation_sets,
+                  :id,
+                  :formation_set,
+                  { include_hidden: false }
+                ) do |b| %>
+              <label class="multi-select-option">
+                <%= b.check_box(
+                      data: {
+                        action: "change->dropdown-multi-select#changed",
+                        option_label: b.text
+                      }
+                    ) %>
+                <span><%= b.text %></span>
+              </label>
+            <% end %>
+          </div>
+        </div>
       </div>
 
       <div class="play-search__field">
