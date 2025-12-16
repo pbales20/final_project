@@ -35,6 +35,7 @@ export default class extends Controller {
     const checked = this.checkboxElements().filter((checkbox) => checkbox.checked)
     if (checked.length === 0) {
       this.summaryTarget.textContent = this.defaultLabelValue || "Select"
+      this.summaryTarget.classList.add("is-placeholder")
       return
     }
 
@@ -42,6 +43,7 @@ export default class extends Controller {
       .map((checkbox) => checkbox.dataset.optionLabel)
       .filter(Boolean)
 
+    this.summaryTarget.classList.remove("is-placeholder")
     if (labels.length <= 2) {
       this.summaryTarget.textContent = labels.join(", ")
     } else {
