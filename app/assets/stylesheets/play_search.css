@@ -26,6 +26,19 @@
   width: 100%;
 }
 
+.play-search__field .multi-select-dropdown {
+  min-height: 2.5rem;
+  border: 1px solid #ccc;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.play-search__field .multi-select-dropdown.is-open {
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
 .play-search__actions {
   display: flex;
   flex-wrap: wrap;

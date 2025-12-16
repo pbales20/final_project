@@ -40,10 +40,14 @@
               {},
               {
                 multiple: true,
-                size: 6,
+                size: 1,
+                data: {
+                  controller: "multi-select",
+                  action: "focus->multi-select#expand blur->multi-select#collapse",
+                  multi_select_expanded_size_value: 6
+                },
                 onchange: 'this.form.requestSubmit();'
               } %>
-        <small>Hold Cmd/Ctrl to pick several formations.</small>
       </div>
 
       <div class="play-search__field">
@@ -58,10 +62,14 @@
               {},
               {
                 multiple: true,
-                size: 6,
+                size: 1,
+                data: {
+                  controller: "multi-select",
+                  action: "focus->multi-select#expand blur->multi-select#collapse",
+                  multi_select_expanded_size_value: 6
+                },
                 onchange: 'this.form.requestSubmit();'
               } %>
-        <small>Hold Cmd/Ctrl to pick several sets.</small>
       </div>
 
       <div class="play-search__field">
