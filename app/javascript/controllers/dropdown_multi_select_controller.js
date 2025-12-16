@@ -26,15 +26,6 @@ export default class extends Controller {
     }
   }
 
-  clear(event) {
-    event.preventDefault()
-    this.checkboxElements().forEach((checkbox) => {
-      checkbox.checked = false
-    })
-    this.updateSummary()
-    this.submitForm()
-  }
-
   changed() {
     this.updateSummary()
     this.submitForm()

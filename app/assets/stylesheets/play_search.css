@@ -33,20 +33,28 @@
 .multi-select-toggle {
   width: 100%;
   text-align: left;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid #cbd5e1;
-  border-radius: 4px;
-  background-color: #fff;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid #475569;
+  border-radius: 0.5rem;
+  background-color: #0f172a;
+  color: #e2e8f0;
   font-size: 0.95rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 0.75rem;
   cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .multi-select-toggle:hover {
-  border-color: #64748b;
+  border-color: #38bdf8;
+}
+
+.multi-select-toggle.is-open,
+.multi-select-toggle:focus-visible {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.3);
 }
 
 .multi-select-caret {
@@ -54,24 +62,19 @@
 }
 
 .multi-select-panel {
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  padding: 0.5rem;
-  background: #fff;
-  max-height: 250px;
+  border: 1px solid #475569;
+  border-radius: 0.5rem;
+  padding: 0.35rem;
+  background: #0f172a;
+  color: #e2e8f0;
+  max-height: 260px;
   overflow-y: auto;
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 10px 25px rgba(2, 6, 23, 0.45);
   position: absolute;
   top: calc(100% + 4px);
   left: 0;
   right: 0;
   z-index: 10;
-}
-
-.multi-select-panel__actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 0.5rem;
 }
 
 .multi-select-options {
@@ -82,23 +85,18 @@
 .multi-select-option {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
   font-size: 0.9rem;
+  padding: 0.25rem 0.35rem;
+  border-radius: 0.35rem;
 }
 
-.link-button {
-  background: none;
-  border: none;
-  padding: 0;
-  color: #2563eb;
-  text-decoration: underline;
-  cursor: pointer;
-  font-size: 0.9rem;
+.multi-select-option:hover {
+  background-color: rgba(148, 163, 184, 0.08);
 }
 
-.multi-select-toggle.is-open {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+.multi-select-option span {
+  flex: 1;
 }
 
 .play-search__actions {
