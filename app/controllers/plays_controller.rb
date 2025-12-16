@@ -1,6 +1,17 @@
 class PlaysController < ApplicationController
 def ransackindex
-  @q = Play.ransack(params[:q])
+  q_params = params[:q].present? ? params[:q].permit!.to_h : {}
+  @q = Play.ransack(q_params)
+
+  favorites_filter = lambda do |scope|
+    if params[:favorites_only] == "1" && current_user.present?
+      scope.where(
+        id: Playfavorite.where(user_id: current_user.id).select(:play_id)
+      )
+    else
+      scope
+    end
+  end
 
 @favorite_play_ids =
   if current_user.present?
@@ -9,20 +20,28 @@ def ransackindex
     Set.new
   end
 
-  plays_scope = @q.result(distinct: true)
-                  .includes(:formation_set, :formation, :playbooks)
-
-  # ✅ Favorites-only filter (new)
-if params[:favorites_only] == "1" && current_user.present?
-  plays_scope = plays_scope.where(
-    id: Playfavorite.where(user_id: current_user.id).select(:play_id)
+  plays_scope = favorites_filter.call(
+    @q.result(distinct: true)
+      .includes(:formation_set, :formation, :playbooks)
   )
-end
 
+  scoped_options = lambda do |excluded_key|
+    filtered_params = q_params.except(excluded_key.to_s)
+    filtered_query  = Play.ransack(filtered_params)
 
-  formation_ids     = plays_scope.joins(:formation).distinct.pluck("formations.id")
-  formation_set_ids = plays_scope.distinct.pluck(:formation_set_id)
-  playbook_ids      = plays_scope.joins(:playbooks).distinct.pluck("playbooks.id")
+    favorites_filter.call(
+      filtered_query.result(distinct: true)
+                    .includes(:formation_set, :formation, :playbooks)
+    )
+  end
+
+  formation_scope     = scoped_options.call(:formation_set_formation_id_eq)
+  formation_set_scope = scoped_options.call(:formation_set_id_eq)
+  playbook_scope      = scoped_options.call(:playbooks_id_eq)
+
+  formation_ids     = formation_scope.joins(:formation).distinct.pluck("formations.id")
+  formation_set_ids = formation_set_scope.distinct.pluck(:formation_set_id)
+  playbook_ids      = playbook_scope.joins(:playbooks).distinct.pluck("playbooks.id")
 
   @formations     = Formation.where(id: formation_ids).order(:formation_name)
   @formation_sets = FormationSet.where(id: formation_set_ids).order(:formation_set)
